@@ -3,7 +3,9 @@ package parser;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.antlr.v4.runtime.ANTLRFileStream;
+
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import com.mtdi.ModelBasedTesting.grammarUI;
 import com.mtdi.ModelBasedTesting.lexerUI;
@@ -18,8 +20,8 @@ public class Parser {
 		ArrayList<String> uiCommands = new ArrayList<String>();
 		try {
 			String program = fileIntegrator;
-			@SuppressWarnings("deprecation")
-			lexerUI lexer = new lexerUI(new ANTLRFileStream(program));
+			ANTLRStringStream in = new ANTLRStringStream(program);
+			lexerUI lexer = new lexerUI((CharStream) in);
 			//lexer.removeErrorListeners();
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			grammarUI parser = new grammarUI(tokens);
