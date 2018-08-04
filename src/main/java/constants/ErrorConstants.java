@@ -7,6 +7,7 @@ public class ErrorConstants {
 	public static final String CREATE_FILE = "ERROR NO SE PUEDE CREAR EL ARCHIVO";
 	public static final String PROPERTY_SDK = "ERROR NO SE ENCONTRO LA PROPIEDAD SDK.DIR";
 	public static final String PROPERTY_NOT_FOUND = "ERROR NO SE PUEDE LOCALIZAR EL ARCHIVO PROPERTIES";
+	public static final String PROPERTY_COMMANDS_NOT_FOUND = "ERROR NO SE PUEDE LOCALIZAR EL ARCHIVO DE COMANDOS";
 	public static final String PATH_NOT_FOUND = "NO SE ENCONTRO LA RUTA ESPECIFICADA";
 	public static final String COMMAND = "ERROR AL EJECUTAR COMANDO: ";
 	public static final String COMPILATION_FAILED = "ERROR AL COMPILAR";

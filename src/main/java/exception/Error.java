@@ -12,8 +12,4 @@ public class Error extends Exception {
 	public String getMessage() {
 		return message;
 	}
-
-	
-	
-	
 }

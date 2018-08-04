@@ -1,38 +1,61 @@
 package panel.android;
 
+import org.stringtemplate.v4.ST;
+
 import abstractClasses.Verify;
+import models.Singleton;
 
 public class VerifysAndroid extends Verify {
 	
 	@Override
 	public String verifyText(String controlName, String textToCheck) {
 		String controlNameAux = controlName.trim().toLowerCase().replaceAll("&", "");
-		return "onControl(withTagValue(is("+controlNameAux.substring(0, 2).toUpperCase()+controlNameAux.substring(2, controlNameAux.length())+"))).check(matches(withText("+textToCheck+")));";
+		controlNameAux = controlNameAux.substring(0, 2).toUpperCase()+controlNameAux.substring(2, controlNameAux.length());
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_VERIFYTEXT"));
+		c.add("controlName", controlNameAux);
+		c.add("textToCheck", textToCheck);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String isDisplayed(String controlName) {
-		return "onControl(withName("+controlName+")).check(matches(isDisplayed()));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_ISDISPLAYED"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String isCompletelyDisplayed(String controlName) {
-		return "onControl(withName("+controlName+")).check(matches(isCompletelyDisplayed()));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_ISCOMPLETELYDISPLAYED"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String hasFocus(String controlName) {
-		return "onControl(withName("+controlName+")).check(matches(hasFocus()));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_HASFOCUS"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String isEnabled(String controlName) {
-		return "onControl(withName("+controlName+")).check(matches(isEnabled()));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_ISENABLED"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String isClickable(String controlName) {
-		return "onControl(withName("+controlName+")).check(matches(isClickable()));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_ISCLICKABLE"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 }

@@ -1,10 +1,16 @@
 package device.ios;
 
+import org.stringtemplate.v4.ST;
+
+import models.Singleton;
+
 public class DeviceActionsIOS implements interfaces.DeviceActionsInterface {
 
 	@Override
 	public String pressBack(){
-		return "navigationBar().buttons.element(boundBy: 0).tap()";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_PRESSBACK"));
+		String output = c.render();
+		return output;
 	}
 	
 	@Override

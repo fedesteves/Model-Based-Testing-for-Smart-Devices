@@ -1,5 +1,6 @@
 package models;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import com.jcraft.jsch.Session;
 
@@ -14,8 +15,9 @@ public class Singleton {
     private boolean screenshot;
     private String mainObject;
     private Session session;
+    private Properties stringCommands;
     
-    protected Singleton() {
+	protected Singleton() {
     	projectPath = new AndroidIOS("", "");
     	packageName = new AndroidIOS("", "");
     	devicesList = new ArrayList<String>();
@@ -104,8 +106,13 @@ public class Singleton {
 		this.session = session;
 	}
 
-	
-	
+	public Properties getStringCommands() {
+		return stringCommands;
+	}
+
+	public void setStringCommands(Properties stringCommads) {
+		this.stringCommands = stringCommads;
+	}
 	
 
 }

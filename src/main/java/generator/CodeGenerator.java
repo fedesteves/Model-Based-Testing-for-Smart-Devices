@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import abstractClasses.Actions;
 import abstractClasses.Iterate;
 import abstractClasses.Navigate;
@@ -201,7 +200,7 @@ public class CodeGenerator {
 		return generatedTest;
 	}
 
-	// GENERA EL ARCHIVO .JAVA
+	// GENERA EL ARCHIVO .JAVA o .SWIFT
 	public static void writeTestToFile(String generatedTest, String system) throws Error {
 		if(system.equals(EnumOS.ANDROID)){
 			FileHelper.cleanTestDir();

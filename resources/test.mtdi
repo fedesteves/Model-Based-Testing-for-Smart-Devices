@@ -1,0 +1,22 @@
+back
+tap("controlTap")
+longTap("controlLongTap")
+doubleTap("controlDoubleTap")
+typeText("controlText","Texto a escribir")
+swipeDown
+swipeUp
+swipeLeft
+swipeRight
+editDate("control1","05","09","2018")
+editTime("timer1","18","1")
+listTap("vista1","1")
+listScroll("vista1","2")
+go("panel1")
+validate("controlText","verifica este texto")
+isDisplayed("control1")
+isCompletelyDisplayed("control1")
+hasFocus("boton1")
+isEnabled("boton1")
+isClickable("boton1")
+
+

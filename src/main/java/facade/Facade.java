@@ -1,14 +1,14 @@
-package fachada;
+package facade;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import commandLine.Menu;
 import connection.ConnectionIOS;
 import constants.CommandConstants;
+import constants.ErrorConstants;
 import constants.GeneralConstants;
 import constants.MenuConstants;
 import devices.Devices;
@@ -23,7 +23,7 @@ import utils.ConsoleRunner;
 import utils.FileHelper;
 import utils.PrintUI;
 
-public class Fachada {
+public class Facade {
 	
 	// Inicia todo el flujo del sistema
 	public static void main(String[] args) {
@@ -41,9 +41,7 @@ public class Fachada {
 				Singleton instance = Singleton.getInstance();
 				Properties prop = new Properties();
 				prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
-				
 
-				
 				String sys = params[0];
 				int counter = 0, tope = 0;
 				if(sys == EnumOS.ALL)
@@ -128,7 +126,7 @@ public class Fachada {
 		return devices;
 	}
 		
-	public static void loadParamsInSingleton(String OS, ArrayList<String> devices, AndroidIOS projectPath, AndroidIOS packageApp, String mainObject, String takeScreenShot) {
+	public static void loadParamsInSingleton(String OS, ArrayList<String> devices, AndroidIOS projectPath, AndroidIOS packageApp, String mainObject, String takeScreenShot) throws Error {
 		Singleton instance = Singleton.getInstance();
 		instance.setMainObject(mainObject);
 		instance.setClassName(GeneralConstants.TEST_FILE_NAME);
@@ -147,6 +145,14 @@ public class Fachada {
 			case EnumOS.ALL: 
 				instance.setOs(EnumOS.ALL); 
 				break;
+		}
+		//Carga archivo de string de comandos
+		try {
+			Properties propCommands = new Properties();
+			propCommands.load(new FileInputStream(new File(GeneralConstants.COMMAND_STRINGS_PATH)));
+			Singleton.getInstance().setStringCommands(propCommands);
+		} catch (IOException e) {
+			throw new Error(ErrorConstants.PROPERTY_COMMANDS_NOT_FOUND);
 		}
 		
 		if (takeScreenShot == GeneralConstants.YES)

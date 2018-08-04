@@ -1,10 +1,15 @@
 package device.android;
 
+import org.stringtemplate.v4.ST;
+
+import models.Singleton;
+
 public class DeviceActionsAndroid implements interfaces.DeviceActionsInterface {
 
 	@Override
 	public String pressBack(){
-		return "onView(isRoot()).perform(pressBack());";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_PRESSBACK"));
+		return c.render();
 	}
 	
 	@Override

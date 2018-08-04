@@ -1,49 +1,81 @@
 package panel.android;
 
+import org.stringtemplate.v4.ST;
+
 import abstractClasses.Actions;
 import enums.EnumSwipe;
+import models.Singleton;
 
 public class ActionsAndroid extends Actions{
 	
 	@Override
 	public String tap(String controlName) {
-		return "onControl(withName("+controlName+")).perform(click());";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_TAP"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String longTap(String controlName) {
-		return "onControl(withName("+controlName+")).perform(longClick());";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_LONGTAP"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String doubleTap(String controlName) {
-		return "onControl(withName("+controlName+")).perform(doubleClick());";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_DOUBLETAP"));
+		c.add("controlName", controlName);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String typeText(String controlName, String textToType) {
 		String controlNameAux = controlName.trim().toLowerCase().replaceAll("&", "");
-		return "onControl(withTagValue(is("+controlNameAux.substring(0, 2).toUpperCase()+controlNameAux.substring(2, controlNameAux.length())+"))).perform(typeText("+textToType+"));";
+		controlNameAux = controlNameAux.substring(0, 2).toUpperCase()+controlNameAux.substring(2, controlNameAux.length());
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_TYPETEXT"));
+		c.add("controlName", controlNameAux);
+		c.add("textToType", textToType);
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String swipe(EnumSwipe swipe) {
-		return "onControl(withResourceName(\"scrollViewLayoutContentScroll\")).perform("+swipe.toString()+"());";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_SWIPE"));
+		c.add("actionName", swipe.toString());
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String setDate(String controlName, String day, String month, String year) {
 		String monthAux = month;
 		if(Integer.parseInt(month.trim()) < 10 && month.trim().length() > 1)
-		monthAux = month.substring(1, 2);
-		return "onControl(withLabelCaption("+controlName+")).perform(click());\n" +
-		"onControl(withResourceName(\"datePicker\")).perform(PickerActions.setDate("+year.trim()+","+monthAux.trim()+","+ day+"));\n" +
-		"onControl(withResourceName(\"button1\")).perform(click());";
+			monthAux = month.substring(1, 2);
+		String dayAux = day;
+		if(Integer.parseInt(day.trim()) < 10 && day.trim().length() > 1)
+			dayAux = day.substring(1, 2);
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_SETDATE"));
+		c.add("controlName", controlName);
+		c.add("year", year.trim());
+		c.add("month", monthAux.trim());
+		c.add("day", dayAux.trim());
+		String output = c.render();
+		return output;
 	}
 
 	@Override
 	public String setTime(String controlName, String hour, String minute) {
-		return "onControl(withTagValue(is("+controlName+"))).perform(replaceText(\""+hour.trim()+":"+minute.trim()+":00\"));";
+		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_SETTIME"));
+		c.add("controlName", controlName);
+		c.add("hour", hour.trim());
+		c.add("minute", minute.trim());
+		String output = c.render();
+		return output;
 	}
 
 }
