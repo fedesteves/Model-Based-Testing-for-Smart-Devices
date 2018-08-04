@@ -2,7 +2,7 @@ back
 tap("controlTap")
 longTap("controlLongTap")
 doubleTap("controlDoubleTap")
-typeText("controlText","Texto a escribir")
+fill("controlText","Texto a escribir")
 swipeDown
 swipeUp
 swipeLeft
@@ -18,5 +18,3 @@ isCompletelyDisplayed("control1")
 hasFocus("boton1")
 isEnabled("boton1")
 isClickable("boton1")
-
-

@@ -20,6 +20,7 @@ public class ActionsIOS extends Actions{
 	public String longTap(String controlName) {
 		// No esta disponible en la API
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_LONGTAP"));
+		c.add("controlName", controlName);
 		String output = c.render();
 		return output;
 	}
