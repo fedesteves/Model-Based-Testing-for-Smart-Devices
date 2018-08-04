@@ -153,7 +153,7 @@ public class CodeGenerator {
 				generatedTest += actions.typeText(control, param1);
 				break;
 			case CommandConstants.ACTION_EDIT_DATE:
-				generatedTest += actions.setDate(control, param1.replace("\"", ""), param2.replace("\"", ""), param3.replace("\"", ""));
+				generatedTest += actions.setDate(control.replace("\"", ""), param1.replace("\"", ""), param2.replace("\"", ""), param3.replace("\"", ""));
 				break;
 			case CommandConstants.ACTION_EDIT_TIME:
 				generatedTest += actions.setTime(control, param1.replace("\"", ""), param2.replace("\"", ""));

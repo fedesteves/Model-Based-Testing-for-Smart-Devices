@@ -50,9 +50,51 @@ public class ActionsIOS extends Actions{
 	}
 
 	@Override
-	public String setDate(String controlName, String day, String month, String year) {
-		// FALTA
+	public String setDate(String controlName, String day, String month, String year) {	
+		String monthAux = "";
+		switch (month){
+			case "02": 
+				monthAux= "February";
+				break;
+			case "03": 
+				monthAux= "March";
+				break;
+			case "04": 
+				monthAux= "April";
+				break;
+			case "05": 
+				monthAux= "May";
+				break;
+			case "06": 
+				monthAux= "June";
+				break;
+			case "07": 
+				monthAux= "July";
+				break;
+			case "08": 
+				monthAux= "August";
+				break;
+			case "09": 
+				monthAux= "September";
+				break;
+			case "10": 
+				monthAux= "October";
+				break;
+			case "11": 
+				monthAux= "November";
+				break;
+			case "12": 
+				monthAux= "December";
+				break;
+			default: 
+				monthAux= "January";
+				break;
+		}
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_SETDATE"));
+		c.add("controlName", controlName.toLowerCase());
+		c.add("year", year.trim());
+		c.add("month", monthAux.trim());
+		c.add("day", day.trim());
 		String output = c.render();
 		return output;
 	}

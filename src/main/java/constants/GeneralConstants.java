@@ -9,8 +9,8 @@ public class GeneralConstants {
 	public static final String OUTPUT_SUCCESS = "EXITOSO";
 	public static final String OUTPUT_FAILED = "FALLIDO";
 	
-	public static final String PROPERTIES_PATH = "C:\\config.properties";
-	public static final String COMMAND_STRINGS_PATH = "C:\\config.commands";
+	public static final String PROPERTIES_PATH = "resources\\config.properties";
+	public static final String COMMAND_STRINGS_PATH = "resources\\config.commands";
 	
 	
 
