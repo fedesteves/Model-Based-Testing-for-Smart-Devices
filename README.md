@@ -10,7 +10,7 @@ longTap("controlName")
 
 doubleTap("controlName")
 
-typeText("controlName","Texto a escribir")
+typeText("controlName","text to type")
 
 swipeDown
 
@@ -20,17 +20,17 @@ swipeLeft
 
 swipeRight
 
-editDate("controlName","05","09","2018")
+editDate("controlName","day","month","year")
 
-editTime("controlName","18","1")
+editTime("controlName","hour","minute")
 
-listTap("viewName","1")
+listTap("viewName","position")
 
-listScroll("viewName","2")
+listScroll("viewName","position")
 
 go("panelName")
 
-validate("controlName","verifica este texto")
+validate("controlName","text to verify")
 
 isDisplayed("controlName")
 
