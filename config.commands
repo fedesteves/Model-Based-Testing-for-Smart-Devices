@@ -1,36 +1,36 @@
 ANDROID_PRESSBACK=onView(isRoot()).perform(pressBack());
-ANDROID_TAP=onControl(withName(<controlName>)).perform(click());
-ANDROID_LONGTAP=onControl(withName(<controlName>)).perform(longClick());
-ANDROID_DOUBLETAP=onControl(withName(<controlName>)).perform(doubleClick());
-ANDROID_TYPETEXT=onControl(withTagValue(is(<controlName>))).perform(typeText(<textToType>));
+ANDROID_TAP=onControl(withName("<controlName>")).perform(click());
+ANDROID_LONGTAP=onControl(withName("<controlName>")).perform(longClick());
+ANDROID_DOUBLETAP=onControl(withName("<controlName>")).perform(doubleClick());
+ANDROID_TYPETEXT=onControl(withTagValue(is("<controlName>"))).perform(typeText("<textToType>"));
 ANDROID_SWIPE=onControl(withResourceName("scrollViewLayoutContentScroll")).perform(<actionName>());
 ANDROID_SETDATE=onControl(withLabelCaption("<controlName>")).perform(click()); onControl(withResourceName("datePicker")).perform(PickerActions.setDate(<year>,<month>,<day>)); onControl(withResourceName("button1")).perform(click());
-ANDROID_SETTIME=onControl(withTagValue(is(<controlName>))).perform(replaceText("<hour>:<minute>:00"));
+ANDROID_SETTIME=onControl(withTagValue(is("<controlName>"))).perform(replaceText("<hour>:<minute>:00"));
 ANDROID_LISTTAP=onView(withId("<view>")).perform(RecyclerViewActions.actionOnItemAtPosition(<position>, click()));
 ANDROID_SCROLLTAP=onView(withId("<view>")).perform(RecyclerViewActions.scrollToPosition(<position>));
-ANDROID_GO=onControl(withText(<panel>)).perform(click());
-ANDROID_VERIFYTEXT=onControl(withTagValue(is(<controlName>))).check(matches(withText(<textToCheck>)));
-ANDROID_ISDISPLAYED=onControl(withName(<controlName>)).check(matches(isDisplayed()));
-ANDROID_ISCOMPLETELYDISPLAYED=onControl(withName(<controlName>)).check(matches(isCompletelyDisplayed()));
-ANDROID_HASFOCUS=onControl(withName(<controlName>)).check(matches(hasFocus()));
-ANDROID_ISENABLED=onControl(withName(<controlName>)).check(matches(isEnabled()));
-ANDROID_ISCLICKABLE=onControl(withName(<controlName>)).check(matches(isClickable()));
+ANDROID_GO=onControl(withText("<panel>")).perform(click());
+ANDROID_VERIFYTEXT=onControl(withTagValue(is("<controlName>"))).check(matches(withText("<textToCheck>")));
+ANDROID_ISDISPLAYED=onControl(withName("<controlName>")).check(matches(isDisplayed()));
+ANDROID_ISCOMPLETELYDISPLAYED=onControl(withName("<controlName>")).check(matches(isCompletelyDisplayed()));
+ANDROID_HASFOCUS=onControl(withName("<controlName>")).check(matches(hasFocus()));
+ANDROID_ISENABLED=onControl(withName("<controlName>")).check(matches(isEnabled()));
+ANDROID_ISCLICKABLE=onControl(withName("<controlName>")).check(matches(isClickable()));
 
 
 IOS_PRESSBACK=navigationBar().buttons.element(boundBy: 0).tap()
-IOS_TAP=mainTable().tap(text: <controlName>)
+IOS_TAP=mainTable().tap(text: "<controlName>")
 IOS_LONGTAP=
-IOS_DOUBLETAP=mainTable().tap(text: <controlName>)\n\t\tmainTable().tap(text: <controlName>)
-IOS_TYPETEXT=mainTable().fill(edit: <controlName>, value: <textToType>)
+IOS_DOUBLETAP=mainTable().tap(text: "<controlName>")\n\t\tmainTable().tap(text: "<controlName>")
+IOS_TYPETEXT=mainTable().fill(edit: "<controlName>", value: "<textToType>")
 IOS_SWIPE=XCUIApplication().otherElements["Maintable"].<actionName>()
 IOS_SETDATE=mainTable().edit(date: "<controlName>", month: "<month>", day: "<day>", year: "<year>")
 IOS_SETTIME=
-IOS_LISTTAP=
+IOS_LISTTAP=mainTable().grid(name: "<controlName>").row(index: <position>).tap()
 IOS_SCROLLTAP=
-IOS_GO=
-IOS_VERIFYTEXT=let x = mainTable().read(edit: <controlName>)\n\t\tvalidateEquals(expression1: x, expression2: <textToCheck>, message: "El valor deberia ser <textToCheckAux>")
-IOS_ISDISPLAYED=mainTable().isVisible(map: <controlName>)
-IOS_ISCOMPLETELYDISPLAYED=mainTable().isVisible(map: <controlName>)
+IOS_GO=XCUIApplication().buttons["<panelName>"].tap()
+IOS_VERIFYTEXT=let x = mainTable().read(edit: "<controlName>")\n\t\tvalidateEquals(expression1: x, expression2: "<textToCheck>", message: "El valor deberia ser: <textToCheckAux>")
+IOS_ISDISPLAYED=mainTable().isVisible(map: "<controlName>")
+IOS_ISCOMPLETELYDISPLAYED=mainTable().isVisible(map: "<controlName>")
 IOS_HASFOCUS=
 IOS_ISENABLED=
-IOS_ISCLICKABLE=mainTable().isVisible(map: <controlName>)
+IOS_ISCLICKABLE=mainTable().isVisible(map: "<controlName>")

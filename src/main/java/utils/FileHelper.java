@@ -35,7 +35,7 @@ public class FileHelper {
 				        + GeneralConstants.TEST_HEADER_BOT;
 		try {
 			if (!existFile(path)){
-				new File(path.substring(0, path.length()-(GeneralConstants.TEST_FILE_NAME.length() + 6))).mkdirs();
+				new File(path.substring(0, path.length()-(Singleton.getInstance().getMainObject().length())-(GeneralConstants.TEST_FILE_NAME.length())- 6)).mkdirs();
 			}
 			new FileOutputStream(new File(path)).write(textToWrite.getBytes());
 		} catch (IOException e) {
@@ -53,7 +53,7 @@ public class FileHelper {
 			if (!existFile(path)){
 				new File(path).mkdirs();
 			}
-			new FileOutputStream(new File(path+GeneralConstants.TEST_FILE_NAME+".swift")).write(textToWrite.getBytes());
+			new FileOutputStream(new File(path+GeneralConstants.PATH_IOS_DESTINATION)).write(textToWrite.getBytes());
 		} catch (IOException e) {
 			throw new Error(ErrorConstants.CREATE_FILE);
 		}

@@ -22,7 +22,7 @@ public class GeneralConstants {
 	public static final String GRADLE_PROPERTY_FILE_NAME = "local.properties";
 	public static final String GRADLE_BUILD_FILE_NAME = "build.gradle";
 	public static final String TEST_NAME = "testOne";
-	public static final String TEST_FILE_NAME = "UITestSample";
+	public static final String TEST_FILE_NAME = "UITests";
 	public final static String ANDROID_RUNNER = ".test/android.support.test.runner.AndroidJUnitRunner";
 	public static final String ADB_PATH = i.getAdbPath()+"\\platform-tools\\adb";
 	public final static String ADB_INSTALL_APK_DEBUG = " install -r -t "+i.getProjectPath().getAndroid()+i.getMainObject()+"\\build\\outputs\\apk\\debug\\"+i.getMainObject()+"-debug.apk";
@@ -32,7 +32,7 @@ public class GeneralConstants {
 	public static final String GRADLE_PATH = i.getProjectPath().getAndroid();
 	public final static String GRADLE = GRADLE_PATH+"gradlew.bat -p "+ i.getProjectPath().getAndroid() +" assembleAndroidTest";
 	public final static String PATH_ANDROID = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().getAndroid().replaceAll("\\.", "\\\\")+"\\"
-			+ i.getMainObject().toLowerCase()+"\\" +TEST_FILE_NAME+".java";
+			+ i.getMainObject().toLowerCase()+"\\" +i.getMainObject()+TEST_FILE_NAME+".java";
 	public final static String PATH_ANDROID_AUX = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().getAndroid().replaceAll("\\.", "\\\\")+"\\"
 			+ i.getMainObject().toLowerCase();
 	public final static String DEPENDENCY_ANDROID = "\n\tandroidTestImplementation (\'com.android.support.test.espresso:espresso-contrib:2.0\') {exclude module:\'support-annotations\'}\n";
@@ -102,7 +102,7 @@ public class GeneralConstants {
 	public static final String GET_DEVICES_IOS = "xcrun simctl list";
 	public static final String IOS_COMPILE = "xcodebuild -scheme \""+i.getMainObject()+"\" -destination generic/platform=\"iOS Simulator\" -configuration Debug build";
 	
-	public final static String PATH_IOS_DESTINATION = TEST_FILE_NAME+".swift";
+	public final static String PATH_IOS_DESTINATION = i.getMainObject()+TEST_FILE_NAME+".swift";
 	
 	
 	public final static String TEST_HEADER_IOS = "import XCTest\n\nclass UITestSample: XCTestCase { \n" +

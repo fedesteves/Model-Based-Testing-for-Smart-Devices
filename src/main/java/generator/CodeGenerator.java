@@ -50,29 +50,29 @@ public class CodeGenerator {
 					String runParamTwo = "";
 					String runParamThree = "";
 					if(runAction.length > 1)
-						runControl = runAction[1];
+						runControl = runAction[1].replace("\"", "");
 					if(runAction.length > 2)
-						runParamOne = runAction[2];
+						runParamOne = runAction[2].replace("\"", "");
 					if(runAction.length > 3)
-						runParamTwo = runAction[3];
+						runParamTwo = runAction[3].replace("\"", "");
 					if(runAction.length > 4)
-						runParamThree = runAction[4];
+						runParamThree = runAction[4].replace("\"", "");
 					generatedTest += getRunActionTest(runActionType, runControl, runParamOne, runParamTwo, runParamThree, system);
 					break;
 				case CommandConstants.TYPE_VERIFY: 
 					String verifyAux = tests.get(i).split("\\(")[1];
 					verifyAux = verifyAux.substring(0, verifyAux.length()-1);
 					String verifyS[] = verifyAux.split(CommandConstants.FIELD_SEPARATOR);
-					String assertControl = verifyS[1];
-					String assertProperty = verifyS[0];
+					String assertControl = verifyS[1].replace("\"", "");
+					String assertProperty = verifyS[0].trim().replace("\"", "");
 					String assertValue = "";
 					if(verifyS.length == 3)
-						assertValue = verifyS[2];
-					generatedTest += getVerifyTest(assertProperty.trim(), assertControl, assertValue, system);
+						assertValue = verifyS[2].replace("\"", "");
+					generatedTest += getVerifyTest(assertProperty, assertControl, assertValue, system);
 					break;
 				case CommandConstants.TYPE_NAVIGATE: 
 					String navigateAux = tests.get(i).split("\\(")[1];
-					String navigate = navigateAux.substring(0, navigateAux.length()-1);
+					String navigate = navigateAux.substring(0, navigateAux.length()-1).replace("\"","");
 					generatedTest += getNavigateTest(navigate, system);
 					break;
 				case CommandConstants.TYPE_ITERATE: 
@@ -99,10 +99,10 @@ public class CodeGenerator {
 			iterate = new IteratesIOS();
 
 		switch(action.toUpperCase()){
-			case CommandConstants.ACTION_BACK:
+			case CommandConstants.ITERATE_SCROLL:
 				generatedTest += iterate.listScroll(control, position);
 				break;
-			case CommandConstants.ACTION_TAP:
+			case CommandConstants.ITERATE_TAP:
 				generatedTest += iterate.listTap(control, position);
 				break;
 		}
@@ -153,10 +153,10 @@ public class CodeGenerator {
 				generatedTest += actions.typeText(control, param1);
 				break;
 			case CommandConstants.ACTION_EDIT_DATE:
-				generatedTest += actions.setDate(control.replace("\"", ""), param1.replace("\"", ""), param2.replace("\"", ""), param3.replace("\"", ""));
+				generatedTest += actions.setDate(control, param1, param2, param3);
 				break;
 			case CommandConstants.ACTION_EDIT_TIME:
-				generatedTest += actions.setTime(control, param1.replace("\"", ""), param2.replace("\"", ""));
+				generatedTest += actions.setTime(control, param1, param2);
 				break;
 			}
 		return generatedTest;
