@@ -105,7 +105,7 @@ public class GeneralConstants {
 	public final static String PATH_IOS_DESTINATION = i.getMainObject()+TEST_FILE_NAME+".swift";
 	
 	
-	public final static String TEST_HEADER_IOS = "import XCTest\n\nclass UITestSample: XCTestCase { \n" +
+	public final static String TEST_HEADER_IOS = "import XCTest\n\nclass "+TEST_FILE_NAME+": XCTestCase { \n" +
 												 "\n\toverride func setUp() {\n" +
 												 "\t\tsuper.setUp()\n" +
 												 "\t\tcontinueAfterFailure = false\n" +

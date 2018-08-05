@@ -129,7 +129,7 @@ public class Facade {
 	public static void loadParamsInSingleton(String OS, ArrayList<String> devices, AndroidIOS projectPath, AndroidIOS packageApp, String mainObject, String takeScreenShot) throws Error {
 		Singleton instance = Singleton.getInstance();
 		instance.setMainObject(mainObject);
-		instance.setClassName(GeneralConstants.TEST_FILE_NAME);
+		instance.setClassName(mainObject+GeneralConstants.TEST_FILE_NAME);
 		instance.setProjectPath(new AndroidIOS(projectPath.getAndroid(), projectPath.getIOS()));
 		instance.setPackageName(new AndroidIOS(packageApp.getAndroid(), packageApp.getIOS()));
 		switch(OS){

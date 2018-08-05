@@ -1,20 +1,14 @@
-back
-tap("controlTap")
-longTap("controlLongTap")
-doubleTap("controlDoubleTap")
-fill("controlText","Texto a escribir")
 swipeDown
-swipeUp
-swipeLeft
-swipeRight
-editDate("control1","05","09","2018")
-editTime("timer1","18","1")
-listTap("grid1","1")
-listScroll("grid1","2")
-go("panel1")
-validate("controlText","verifica este texto")
-isDisplayed("control1")
-isCompletelyDisplayed("control1")
-hasFocus("boton1")
-isEnabled("boton1")
-isClickable("boton1")
+tap("fechayhora")
+back
+editDate("&Today","18","08","2018")
+editTime("&Time","18","08")
+longTap("&Time")
+back
+doubleTap("&Time")
+hasFocus("&Time")
+isDisplayed("&Today")
+fill("&testo", "texto1")
+isClickable("btn")
+isEnabled("&Time")
+validate("&testo", "texto1")

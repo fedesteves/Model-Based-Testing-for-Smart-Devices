@@ -53,6 +53,7 @@ public class ActionsAndroid extends Actions{
 
 	@Override
 	public String setDate(String controlName, String day, String month, String year) {
+		controlName = controlName.trim().replaceAll("&", "");
 		String monthAux = month;
 		if(Integer.parseInt(month.trim()) < 10 && month.trim().length() > 1)
 			monthAux = month.substring(1, 2);
@@ -70,6 +71,7 @@ public class ActionsAndroid extends Actions{
 
 	@Override
 	public String setTime(String controlName, String hour, String minute) {
+		controlName = controlName.trim().replaceAll("&", "");
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_SETTIME"));
 		c.add("controlName", controlName);
 		c.add("hour", hour.trim());
