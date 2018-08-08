@@ -1,14 +1,15 @@
-swipeDown
-tap("fechayhora")
+listTap("11")
 back
-editDate("&Today","18","08","2018")
-editTime("&Time","18","08")
-longTap("&Time")
+listScroll("10")
+listInsert
+fill("Name","Fede")
+listSave
+
+listUpdate("1")
+listCancel
 back
-doubleTap("&Time")
-hasFocus("&Time")
-isDisplayed("&Today")
-fill("&testo", "texto1")
-isClickable("btn")
-isEnabled("&Time")
-validate("&testo", "texto1")
+
+listSearch("Fede")
+listCancel
+
+listDelete("1")

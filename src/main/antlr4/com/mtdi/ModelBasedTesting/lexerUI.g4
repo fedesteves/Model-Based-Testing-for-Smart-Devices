@@ -74,6 +74,30 @@ ListScroll:
 	'listScroll'
 ;
 
+ListInsert:
+	'listInsert'
+;
+
+ListSave:
+	'listSave'
+;
+
+ListCancel:
+	'listCancel'
+;
+
+ListSearch:
+	'listSearch'
+;
+
+ListDelete:
+	'listDelete'
+;
+
+ListUpdate:
+	'listUpdate'
+;
+
 Go: 
 	'go'
 ;	

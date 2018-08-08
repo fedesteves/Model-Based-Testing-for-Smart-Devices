@@ -73,16 +73,20 @@ public class CodeGenerator {
 				case CommandConstants.TYPE_NAVIGATE: 
 					String navigateAux = tests.get(i).split("\\(")[1];
 					String navigate = navigateAux.substring(0, navigateAux.length()-1).replace("\"","");
-					generatedTest += getNavigateTest(navigate, system);
+					String navigateCommand =navigate.split(CommandConstants.FIELD_SEPARATOR)[0];
+					String panel =navigate.split(CommandConstants.FIELD_SEPARATOR)[1];
+					generatedTest += getNavigateTest(navigateCommand, panel, system);
 					break;
 				case CommandConstants.TYPE_ITERATE: 
 					String iterateAction = tests.get(i).split("\\(")[1];
 					iterateAction = iterateAction.substring(0,iterateAction.length() -1);
 					String iterate[] = iterateAction.split(CommandConstants.FIELD_SEPARATOR);
 					iterateAction = iterate[0];
-					String iterateControl = iterate[1].replace("\"","");
-					String iteratePosition = iterate[2].replace("\"","");
-					generatedTest += getIterateTest(iterateAction, iterateControl, iteratePosition, system);
+					String iteratePosition ="";
+					if (iterate.length==2)
+						iteratePosition = iterate[1].replace("\"","");
+					
+					generatedTest += getIterateTest(iterateAction, iteratePosition, system);
 					break;
 			}
 		}
@@ -90,7 +94,7 @@ public class CodeGenerator {
 	}
 	
 	// Tests de tipo Iteracion
-	private static String getIterateTest(String action, String control, String position, String system) {
+	private static String getIterateTest(String action, String position, String system) {
 		String generatedTest = "";
 		Iterate iterate;
 		if(system == EnumOS.ANDROID)
@@ -100,10 +104,28 @@ public class CodeGenerator {
 
 		switch(action.toUpperCase()){
 			case CommandConstants.ITERATE_SCROLL:
-				generatedTest += iterate.listScroll(control, position);
+				generatedTest += iterate.listScroll(position);
 				break;
 			case CommandConstants.ITERATE_TAP:
-				generatedTest += iterate.listTap(control, position);
+				generatedTest += iterate.listTap(position);
+				break;
+			case CommandConstants.ITERATE_INSERT:
+				generatedTest += iterate.listInsert();
+				break;
+			case CommandConstants.ITERATE_CANCEL:
+				generatedTest += iterate.listCancel();
+				break;
+			case CommandConstants.ITERATE_SAVE:
+				generatedTest += iterate.listSave();
+				break;
+			case CommandConstants.ITERATE_SEARCH:
+				generatedTest += iterate.listSearch(position);
+				break;
+			case CommandConstants.ITERATE_DELETE:
+				generatedTest += iterate.listDelete(position);
+				break;
+			case CommandConstants.ITERATE_UPDATE:
+				generatedTest += iterate.listUpdate(position);
 				break;
 		}
 		return generatedTest;
@@ -189,14 +211,19 @@ public class CodeGenerator {
 	}
 	
 	// Tests de tipo Accion
-	private static String getNavigateTest(String panel, String system) {
+	private static String getNavigateTest(String action, String panel, String system) {
 		String generatedTest = "";
 		Navigate navigate;
 		if(system == EnumOS.ANDROID)
 			navigate = new NavigateAndroid();
 		else
 			navigate = new NavigateIOS();
-		generatedTest += navigate.go(panel);
+		
+		switch(action.toUpperCase()){
+			case CommandConstants.NAVIGATE_GO:
+				generatedTest += navigate.go(panel); 
+				break;	
+		}
 		return generatedTest;
 	}
 

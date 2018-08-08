@@ -43,6 +43,7 @@ public class Menu {
 		Params[6][0] = MenuConstants.SCREENSHOT;
 		Params[6][1] = MenuConstants.CHAR_SCREENSHOT;
 		Params[6][2] = "S"+separator+"N";
+		
 	}
 		
 	public Menu() {

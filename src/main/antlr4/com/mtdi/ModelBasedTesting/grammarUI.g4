@@ -26,7 +26,13 @@ command:
 	| isClickable 
 	| validate 
 	| listTap 
-	| listScroll 
+	| listScroll
+	| listInsert
+	| listSave
+	| listCancel
+	| listSearch
+	| listDelete
+	| listUpdate
 	| go
 ;
 
@@ -86,11 +92,35 @@ validate:
 ;
 
 listTap:
-	ListTap IP control_name COMA value FP
+	ListTap IP value FP
 ;
 
 listScroll:
-	ListScroll IP control_name COMA value FP
+	ListScroll IP value FP
+;
+
+listInsert:
+	ListInsert
+;
+
+listSave:
+	ListSave
+;
+
+listCancel:
+	ListCancel
+;
+
+listSearch:
+	ListSearch IP AnyText FP
+;
+
+listDelete:
+	ListDelete IP AnyText FP
+;
+
+listUpdate:
+	ListUpdate IP AnyText FP
 ;
 
 go:

@@ -27,7 +27,9 @@ public class ConsoleRunner {
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
+            PrintUI.showMessage("\n");
             while ((s = stdInput.readLine()) != null) {
+            	PrintUI.showMessage(s+"\n");
             	// Si contiene ese texto es porque crasheo en alguna clase
             	if(s.contains("android.") && resultMessage == ""){
             		resultMessage += "\n"+s;
@@ -90,7 +92,9 @@ public class ConsoleRunner {
 	        StringBuilder builder = new StringBuilder();
 	        String line;
 	        ArrayList<String> list = new ArrayList<>();
+	        PrintUI.showMessage("\n");
 	        while ((line = reader.readLine()) != null) {
+	        	PrintUI.showMessage(line+"\n");
 	        	list.add(line);
 	            builder.append(line);
 	            builder.append("\n");
