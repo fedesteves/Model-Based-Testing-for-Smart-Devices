@@ -28,7 +28,7 @@ public class MenuConstants {
 	public static final String PACKAGE = "PAQUETE";
 	public static final String MAIN_OBJECT = "MAIN_OBJECT";
 	public static final String SCREENSHOT = "SCREENSHOT";
-	
+
 	public static final String OPTION_ALL = "TODOS";
 	public static final String OPTION_TWO = "AMBOS";
 	public static final String OPTION_ANDROID = "ANDROID";

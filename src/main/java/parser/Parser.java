@@ -64,51 +64,6 @@ public class Parser {
 						break;
 				}
 			}
-			
-			
-			
-			/*
-			// Comandos sin parametros
-			if(!uiTests.get(i).contains("(")){
-				parsedTests.add(CommandConstants.TYPE_RUN_ACTION+"("+uiTests.get(i).toUpperCase()+")");
-			}
-			// Comandos con parametros
-			else{
-				String[] initialSplit = uiTests.get(i).split("\\(");
-				// Comandos con un solo parametro
-				if(!initialSplit[1].contains(CommandConstants.FIELD_SEPARATOR)){
-					String actionType = CommandConstants.TYPE_RUN_ACTION;
-					if(initialSplit[0].toUpperCase().contains("IS") || initialSplit[0].toUpperCase().contains("HAS") || initialSplit[0].toUpperCase().contains("VALIDATE"))
-						actionType = CommandConstants.TYPE_VERIFY;
-					else if(initialSplit[0].toUpperCase().contains("GO"))
-						actionType = CommandConstants.TYPE_NAVIGATE;
-					
-					else if(initialSplit[0].toUpperCase().contains("LIST"))
-						actionType = CommandConstants.TYPE_ITERATE;
-				
-					if(actionType == CommandConstants.TYPE_NAVIGATE)
-						parsedTests.add(actionType+"("+initialSplit[1].substring(0, initialSplit[1].length()-1)+")");
-					else if(actionType == CommandConstants.TYPE_ITERATE)
-						parsedTests.add(actionType+"("+initialSplit[1].substring(0, initialSplit[1].length()-1)+")");
-					else
-						parsedTests.add(actionType+"("+initialSplit[0].toUpperCase()+CommandConstants.FIELD_SEPARATOR+initialSplit[1].substring(0, initialSplit[1].length()-1)+")");
-				}
-				// Comandos con mas de un parametro
-				else{
-					String[] split = initialSplit[1].split(CommandConstants.FIELD_SEPARATOR);
-					switch(split.length){
-						case 2: 
-							parsedTests.add(getTestTwoParams(initialSplit[0].toUpperCase(), split[0], split[1].substring(0, split[1].length()-1)));
-							break;
-						case 3:
-							parsedTests.add(getTestThreeParams(initialSplit[0].toUpperCase(), split[0], split[1], split[2].substring(0, split[2].length()-1)));
-							break;
-						case 4:
-							parsedTests.add(getTestFourParams(initialSplit[0].toUpperCase(), split[0], split[1], split[2], split[3].substring(0, split[3].length()-1)));
-							break;
-					}
-				}
-			}*/
 		}
 		return parsedTests;
 	}

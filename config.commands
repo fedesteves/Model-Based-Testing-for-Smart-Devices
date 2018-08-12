@@ -25,12 +25,12 @@ ANDROID_ISCLICKABLE=onControl(withName("<controlName>")).check(matches(isClickab
 
 IOS_PRESSBACK=navigationBar().buttons.element(boundBy: 0).tap()
 IOS_TAP=mainTable().tap(text: "<controlName>")
-IOS_LONGTAP=
+IOS_LONGTAP=mainTable().otherElements["<controlName>"].press(forDuration: 4) 
 IOS_DOUBLETAP=mainTable().tap(text: "<controlName>")\n\t\tmainTable().tap(text: "<controlName>")
 IOS_TYPETEXT=mainTable().fill(edit: "<controlName>", value: "<textToType>")
 IOS_SWIPE=XCUIApplication().otherElements["Maintable"].<actionName>()
 IOS_SETDATE=mainTable().edit(date: "<controlName>", month: "<month>", day: "<day>", year: "<year>")
-IOS_SETTIME=
+IOS_SETTIME=let picker:XCUIElement = XCUIApplication().datePickers.element(boundBy: 0) \npicker.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "<hour>")\npicker.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: "<minute>")\npicker.pickerWheels.element(boundBy: 2).adjust(toPickerWheelValue: "<am_pm>")
 IOS_LISTTAP=mainTable().grid(name: "Grid1").row(index: <position>).tap()
 IOS_LISTSCROLL=
 IOS_LISTINSERT=navigationBar().buttons["Add"].tap()

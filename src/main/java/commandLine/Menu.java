@@ -1,5 +1,6 @@
 package commandLine;
 
+import constants.GeneralConstants;
 import constants.MenuConstants;
 import utils.FileHelper;
 
@@ -52,6 +53,8 @@ public class Menu {
 	}
 	
 	public String[] checkArgs (String[] args) throws Error{
+		
+		
 		switch (args.length) {
 			case 0: { //NO RECIBE PARAMETROS
 				paramsOK = false;
@@ -63,6 +66,7 @@ public class Menu {
 				break;
 			}
 			default :{
+				
 				if (numParams*2 != args.length){
 					paramsOK = false;
 					throw new Error(MenuConstants.VERIFY_PARAMS);
@@ -103,11 +107,30 @@ public class Menu {
 								throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.FILE_NOT_EXIST+Params[y][3]);
 							}
 							else if (Params[y][0] == MenuConstants.PROJECT_PATH)  {
-								String[] aux = Params[y][3].split(separator);
-								for (int z = 0; z < aux.length; z++){
-									if (!FileHelper.existDir(aux[z])) {
+								
+								if (Params[0][3].toUpperCase().equals("B")){
+									String[] aux = Params[y][3].split(separator);
+									//ANDROID
+									if (!FileHelper.existDir(aux[0])) {
 										paramsOK = false;
-										throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.DIR_NOT_EXIST+aux[z]);
+										throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.DIR_NOT_EXIST+aux[0]);
+									}
+									// IOS
+									if (aux[1].equals("")){
+										paramsOK = false;
+										throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.DIR_NOT_EXIST);
+									}
+								}
+								
+								if (Params[0][3].toUpperCase().equals("A")){
+									if (!FileHelper.existDir(Params[y][3])) {
+										paramsOK = false;
+										throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.DIR_NOT_EXIST+Params[y][3]);
+									}
+								} else if (Params[0][3].toUpperCase().equals("I")) {
+									if (Params[y][3].equals("")){
+										paramsOK = false;
+										throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.DIR_NOT_EXIST);
 									}
 								}
 							}
@@ -116,6 +139,21 @@ public class Menu {
 									Params[y][3] = MenuConstants.OPTION_ALL;
 								}	
 							}
+							else if (Params[y][0] == MenuConstants.MAIN_OBJECT)  {
+								if (Params[y][3].equals("")){
+									paramsOK = false;
+									throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.NO_OPTION);
+								}	
+							}
+							else if (Params[y][0] == MenuConstants.PACKAGE)  {
+								if ((Params[0][3].toUpperCase().equals("A")) && (Params[y][3].equals(""))){
+									paramsOK = false;
+									throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.NO_OPTION);
+								}	
+								if ((Params[y][3].split(separator).length > 1))
+									Params[y][3]=Params[y][3].split(separator)[0];
+							}
+							
 							else if (Params[y][0] == MenuConstants.SYSTEM)  {
 								if (Params[y][3].toUpperCase().equals("A")){
 									Params[y][3] = MenuConstants.OPTION_ANDROID;
@@ -154,17 +192,16 @@ public class Menu {
 								}	
 							}
 							
-							if (Params[y][0]== MenuConstants.SCREENSHOT)  {
+							else if (Params[y][0]== MenuConstants.SCREENSHOT)  {
 								if (Params[y][3].toUpperCase().equals("S")){
-									Params[y][3] = "YES";
+									Params[y][3] = GeneralConstants.YES;
 								}else if (Params[y][3].toUpperCase().equals("N")){
-									Params[y][3] = "NO";		
+									Params[y][3] = GeneralConstants.NO;		
 								}else {
 									paramsOK = false;
 									throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.INVALID+Params[y][3]);
 								}	
-							}
-							
+							}							
 						} 
 						else {
 							paramsOK = false;

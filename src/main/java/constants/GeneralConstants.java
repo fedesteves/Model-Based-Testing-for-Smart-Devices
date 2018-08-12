@@ -17,6 +17,7 @@ public class GeneralConstants {
 	/************** ANDROID ***************************************
 	 ****************************************************************
 	 ***************************************************************/
+	public static final String PATH_TO_COPY_PROJECT = "temp_Android_project\\";
 	public static final String SUBDIR_GX_PROJECT_PATH = "\\mobile\\Android\\";
 	public static final String GRADLE_PROPERTY_SDK_DIR = "sdk.dir";
 	public static final String GRADLE_PROPERTY_FILE_NAME = "local.properties";
@@ -28,13 +29,11 @@ public class GeneralConstants {
 	public final static String ADB_INSTALL_APK_DEBUG = " install -r -t "+i.getProjectPath().getAndroid()+i.getMainObject()+"\\build\\outputs\\apk\\debug\\"+i.getMainObject()+"-debug.apk";
 	public final static String ADB_INSTALL_APK_TEST = " install -r "+i.getProjectPath().getAndroid()+i.getMainObject()+"\\build\\outputs\\apk\\androidTest\\debug\\"+i.getMainObject()+"-debug-androidTest.apk";
 	public final static String ADB_DEVICES = ADB_PATH+" devices";
-	//public final static String ADB_RUN_CLASS = ADB_PATH+" shell am instrument -w -e class " + i.getPackageName().getAndroid()+ "." + i.getClassName() + " "+i.getPackageName().getAndroid()+ANDROID_RUNNER;
 	public static final String GRADLE_PATH = i.getProjectPath().getAndroid();
-	public final static String GRADLE = GRADLE_PATH+"gradlew.bat -p "+ i.getProjectPath().getAndroid() +" assembleAndroidTest";
-	public final static String PATH_ANDROID = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().getAndroid().replaceAll("\\.", "\\\\")+"\\"
-			+ i.getMainObject().toLowerCase()+"\\" +i.getMainObject()+TEST_FILE_NAME+".java";
-	public final static String PATH_ANDROID_AUX = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().getAndroid().replaceAll("\\.", "\\\\")+"\\"
-			+ i.getMainObject().toLowerCase();
+	public final static String GRADLE = GRADLE_PATH+"gradlew.bat -p "+ i.getProjectPath().getAndroid()+" assembleAndroidTest";
+	public final static String PATH_ANDROID = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().replaceAll("\\.", "\\\\")+"\\"
+			+"\\" +i.getMainObject()+TEST_FILE_NAME+".java";
+	public final static String PATH_ANDROID_AUX = i.getProjectPath().getAndroid() + i.getMainObject() + "\\src\\androidTest\\java\\" + i.getPackageName().replaceAll("\\.", "\\\\")+"\\";
 	public final static String DEPENDENCY_ANDROID = "\n\tandroidTestImplementation (\'com.android.support.test.espresso:espresso-contrib:2.0\') {exclude module:\'support-annotations\'}\n";
 	public final static String DEPENDENDY_ANDROID_SCREENSHOT = "\nandroidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'\n";
 	public final static String YES = "YES";
@@ -43,7 +42,8 @@ public class GeneralConstants {
 	
 	
 	// Constantes al crear la clase .java
-	public final static String ACTIVITY_RULE = "\t@Rule \n\tpublic GenexusActivityTestRule<Main> mActivityRule = new GenexusActivityTestRule<>(Main.class);";
+	public final static String ACTIVITY_RULE = "\t@Rule \n\tpublic GenexusActivityTestRule<Main> mActivityRule = new GenexusActivityTestRule<>(Main.class);\n";
+	
 	public final static String IMPORTS_ANDROID = 
 			  "import org.junit.Test;\n"
 			+ "import android.content.Intent;\n"
@@ -58,7 +58,8 @@ public class GeneralConstants {
 			+ "import android.os.Environment;\n"
 			+ "import android.support.test.InstrumentationRegistry;\n"
 			//+ "import android.support.test.uiautomator.UiDevice;\n"
-			+ "import static org.hamcrest.Matchers.is;\n"
+			+ "import static org.hamcrest.Matchers.*;\n"
+			+ "import com.artech.controls.GxListView;\n"
 			+ "import com.genexus.uitesting.rules.GenexusActivityTestRule;\n"
 			+ "import static com.genexus.uitesting.matchers.Selectors.*;\n"
 			+ "import static com.genexus.uitesting.matchers.ControlMatchers.*;\n"
@@ -68,10 +69,19 @@ public class GeneralConstants {
 			+ "import org.junit.rules.TestWatcher;\n"
 			+ "import org.junit.runner.Description;\n"
 			+ "import static android.support.test.espresso.assertion.ViewAssertions.*;\n\n\n";
+	public final static String IMPORTS_ANDROID_SCREENSHOT=
+			"import android.support.test.rule.GrantPermissionRule;\n"
+			+"import android.support.test.runner.screenshot.ScreenCapture;\n"
+			+"import android.support.test.runner.screenshot.Screenshot;\n"
+			+"import java.io.IOException;\n"
+			+"import static android.Manifest.permission.READ_EXTERNAL_STORAGE;\n"
+			+"import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;\n"
+			+"import android.graphics.Bitmap;\n";
 	
-
+	
 	/* CABEZAL DE LA CLASE */
-	public final static String TEST_HEADER_ANDROID = "package "+i.getPackageName().getAndroid()+ "." +i.getMainObject().toLowerCase()+";\n\n"
+	public final static String TEST_HEADER_ANDROID = "package "+i.getPackageName()+";\n\n"
+			+ IMPORTS_ANDROID_SCREENSHOT
             + IMPORTS_ANDROID
 			+ "public class "+i.getClassName()+"{\n\n"
 			+ ACTIVITY_RULE;
@@ -113,7 +123,7 @@ public class GeneralConstants {
 												 "\t}";
 	public final static String TEST_TEAR_IOS = "\n\toverride func tearDown() {\n" +
 										       "\t\tsuper.tearDown()\n\t}";
-	
+	public final static String PATH_IOS= System.getProperty("user.dir")+"\\temp_IOS\\";
 	
 	
 	

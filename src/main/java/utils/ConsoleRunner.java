@@ -19,6 +19,7 @@ public class ConsoleRunner {
 		
 	// Ejecuta un comando en consola
 	public static TestResult executeCmdAndroid(String cmdCommand) throws Error {
+		//PrintUI.showMessage("\n"+cmdCommand+"\n");
 		String s = null;
 		int resultCode = 0;
 		String resultMessage = "";
@@ -27,11 +28,10 @@ public class ConsoleRunner {
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-            PrintUI.showMessage("\n");
             while ((s = stdInput.readLine()) != null) {
-            	PrintUI.showMessage(s+"\n");
+            	//PrintUI.showMessage(s+"\n");
             	// Si contiene ese texto es porque crasheo en alguna clase
-            	if(s.contains("android.") && resultMessage == ""){
+            	if(s.contains("android.") && resultMessage == "" ){
             		resultMessage += "\n"+s;
             		resultCode = 1;
             	}
@@ -42,7 +42,7 @@ public class ConsoleRunner {
             }
             
             // Cachea otros errores
-            while ((s = stdError.readLine()) != null) {
+            while ((s = stdError.readLine()) != null && !cmdCommand.contains("gradle")) {
 	            resultCode = 1;
             }
         }
@@ -92,9 +92,8 @@ public class ConsoleRunner {
 	        StringBuilder builder = new StringBuilder();
 	        String line;
 	        ArrayList<String> list = new ArrayList<>();
-	        PrintUI.showMessage("\n");
 	        while ((line = reader.readLine()) != null) {
-	        	PrintUI.showMessage(line+"\n");
+	        	//PrintUI.showMessage(line+"\n");
 	        	list.add(line);
 	            builder.append(line);
 	            builder.append("\n");

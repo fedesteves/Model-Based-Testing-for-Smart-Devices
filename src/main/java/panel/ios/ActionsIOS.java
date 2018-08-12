@@ -102,8 +102,15 @@ public class ActionsIOS extends Actions{
 
 	@Override
 	public String setTime(String controlName, String hour, String minute) {
-		// FALTA
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_SETTIME"));
+		c.add("hour", hour.trim());
+		c.add("minute", minute.trim());
+		String temp = "AM";
+		for (int i=12; i < 25 ;i++)
+			if (hour.contains(Integer.toString(i)))
+				temp = "PM";
+		c.add("am_pm", temp);
+		
 		String output = c.render();
 		return output;
 	}

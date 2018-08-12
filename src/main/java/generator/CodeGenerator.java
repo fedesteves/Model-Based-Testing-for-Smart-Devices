@@ -1,16 +1,11 @@
 package generator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
 import abstractClasses.Actions;
 import abstractClasses.Iterate;
 import abstractClasses.Navigate;
 import abstractClasses.Verify;
 import constants.CommandConstants;
-import constants.ErrorConstants;
 import constants.GeneralConstants;
 import device.android.DeviceActionsAndroid;
 import device.ios.DeviceActionsIOS;
@@ -234,13 +229,7 @@ public class CodeGenerator {
 			FileHelper.createFileAndroid(GeneralConstants.PATH_ANDROID, generatedTest);
 		}
 		else{
-			Properties prop = new Properties();
-			try {
-				prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
-				FileHelper.createFileIOS(prop.getProperty("PATH_IOS"), generatedTest);
-			} catch (IOException e) {
-				throw new Error(ErrorConstants.PROPERTY_NOT_FOUND);
-			}
+			FileHelper.createFileIOS(GeneralConstants.PATH_IOS, generatedTest);
 		}
 	}
 	
