@@ -35,10 +35,10 @@ public class PrintUI {
 		System.out.println("\tn: No");
 		
 		System.out.println("");
-		System.out.println("-"+MenuConstants.CHAR_PROJECT_PATH+" ruta/aplicacion\t Ruta donde se encuentra la aplicacion.");
+		System.out.println("-"+MenuConstants.CHAR_PROJECT_PATH_ANDROID+" ruta/aplicacion\t Ruta donde se encuentra la aplicacion.");
 		
 		System.out.println("");
-		System.out.println("-"+MenuConstants.CHAR_PACKAGE+" nombre Paquete\t Especificar nombre del paquete.");
+		System.out.println("-"+MenuConstants.CHAR_PACKAGE_ANDROID+" nombre Paquete\t Especificar nombre del paquete.");
 		
 		System.out.println("");
 		System.out.println("-"+MenuConstants.CHAR_MAIN_OBJECT+" Objeto Main   \t Especificar nombre del objeto principal.");

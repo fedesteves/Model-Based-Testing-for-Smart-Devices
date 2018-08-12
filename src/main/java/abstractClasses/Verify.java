@@ -3,10 +3,10 @@ package abstractClasses;
 import interfaces.PanelVerifysInterface;
 
 public abstract class Verify implements PanelVerifysInterface{
-	public abstract String hasFocus(String view);
-	public abstract String verifyText(String view, String textToCheck);
-	public abstract String isDisplayed(String view);
-	public abstract String isCompletelyDisplayed(String view);
-	public abstract String isEnabled(String view);
-	public abstract String isClickable(String view);
+	public abstract String hasFocus(String controlName);
+	public abstract String verifyText(String controlName, String textToCheck);
+	public abstract String isDisplayed(String controlName);
+	public abstract String isCompletelyDisplayed(String controlName);
+	public abstract String isEnabled(String controlName);
+	public abstract String isClickable(String controlName);
 }

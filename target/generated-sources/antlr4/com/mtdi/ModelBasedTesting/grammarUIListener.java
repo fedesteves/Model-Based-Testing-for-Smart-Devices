@@ -188,6 +188,66 @@ public interface grammarUIListener extends ParseTreeListener {
 	 */
 	void exitListScroll(grammarUI.ListScrollContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link grammarUI#listInsert}.
+	 * @param ctx the parse tree
+	 */
+	void enterListInsert(grammarUI.ListInsertContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listInsert}.
+	 * @param ctx the parse tree
+	 */
+	void exitListInsert(grammarUI.ListInsertContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarUI#listSave}.
+	 * @param ctx the parse tree
+	 */
+	void enterListSave(grammarUI.ListSaveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listSave}.
+	 * @param ctx the parse tree
+	 */
+	void exitListSave(grammarUI.ListSaveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarUI#listCancel}.
+	 * @param ctx the parse tree
+	 */
+	void enterListCancel(grammarUI.ListCancelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listCancel}.
+	 * @param ctx the parse tree
+	 */
+	void exitListCancel(grammarUI.ListCancelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarUI#listSearch}.
+	 * @param ctx the parse tree
+	 */
+	void enterListSearch(grammarUI.ListSearchContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listSearch}.
+	 * @param ctx the parse tree
+	 */
+	void exitListSearch(grammarUI.ListSearchContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarUI#listDelete}.
+	 * @param ctx the parse tree
+	 */
+	void enterListDelete(grammarUI.ListDeleteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listDelete}.
+	 * @param ctx the parse tree
+	 */
+	void exitListDelete(grammarUI.ListDeleteContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link grammarUI#listUpdate}.
+	 * @param ctx the parse tree
+	 */
+	void enterListUpdate(grammarUI.ListUpdateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammarUI#listUpdate}.
+	 * @param ctx the parse tree
+	 */
+	void exitListUpdate(grammarUI.ListUpdateContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link grammarUI#go}.
 	 * @param ctx the parse tree
 	 */

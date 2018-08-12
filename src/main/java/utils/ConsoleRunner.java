@@ -19,6 +19,9 @@ public class ConsoleRunner {
 		
 	// Ejecuta un comando en consola
 	public static TestResult executeCmdAndroid(String cmdCommand) throws Error {
+		
+		//PrintUI.showMessage("\n"+cmdCommand+"\n");
+		
 		String s = null;
 		int resultCode = 0;
 		String resultMessage = "";
@@ -28,8 +31,9 @@ public class ConsoleRunner {
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
             while ((s = stdInput.readLine()) != null) {
+            	//PrintUI.showMessage(s+"\n");
             	// Si contiene ese texto es porque crasheo en alguna clase
-            	if(s.contains("android.") && resultMessage == ""){
+            	if(s.contains("android.") && resultMessage == "" ){
             		resultMessage += "\n"+s;
             		resultCode = 1;
             	}
@@ -40,7 +44,7 @@ public class ConsoleRunner {
             }
             
             // Cachea otros errores
-            while ((s = stdError.readLine()) != null) {
+            while ((s = stdError.readLine()) != null && !cmdCommand.contains("gradle")) {
 	            resultCode = 1;
             }
         }
@@ -83,7 +87,9 @@ public class ConsoleRunner {
         	Session session = Singleton.getInstance().getSession();
 	        ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
 	        InputStream in = channelExec.getInputStream();
-
+	        
+	        //PrintUI.showMessage("\n"+command+"\n");
+	        
             channelExec.setCommand(command);
 			channelExec.connect();
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -91,6 +97,7 @@ public class ConsoleRunner {
 	        String line;
 	        ArrayList<String> list = new ArrayList<>();
 	        while ((line = reader.readLine()) != null) {
+	        	//PrintUI.showMessage(line+"\n");
 	        	list.add(line);
 	            builder.append(line);
 	            builder.append("\n");

@@ -8,7 +8,7 @@ public class Singleton {
     private static Singleton instance = null;
 	private String os;
 	private AndroidIOS projectPath;
-	private AndroidIOS packageName;
+	private String packageName;
 	private String className;
     private ArrayList<String> devicesList;
     private String adbPath;
@@ -16,10 +16,10 @@ public class Singleton {
     private String mainObject;
     private Session session;
     private Properties stringCommands;
-    
+
+
 	protected Singleton() {
     	projectPath = new AndroidIOS("", "");
-    	packageName = new AndroidIOS("", "");
     	devicesList = new ArrayList<String>();
     }
 
@@ -33,6 +33,7 @@ public class Singleton {
 	public void setDevicesList(ArrayList<String> devicesList) {
 		this.devicesList = devicesList;
 	}
+
 	
 	public String getOs() {
 		return os;
@@ -50,11 +51,11 @@ public class Singleton {
 		this.projectPath = projectPath;
 	}
 
-	public AndroidIOS getPackageName() {
+	public String getPackageName() {
 		return packageName;
 	}
 
-	public void setPackageName(AndroidIOS packageName) {
+	public void setPackageName(String packageName) {
 		this.packageName = packageName;
 	}
 

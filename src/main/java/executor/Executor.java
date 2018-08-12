@@ -1,11 +1,6 @@
 package executor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
-
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -25,11 +20,11 @@ public class Executor {
 	
 	public static void executeTests(String system) throws Error {
 		if(system.equals(EnumOS.ANDROID)){
-			PrintUI.showMessage("\n"+EnumOS.ANDROID+"\n");
+			//PrintUI.showMessage("\n"+EnumOS.ANDROID+"\n");
 			executeTestsAndroid();
 		}
 		else{
-			PrintUI.showMessage("\n"+EnumOS.IOS+"\n");
+			//PrintUI.showMessage("\n"+EnumOS.IOS+"\n");
 			executeTestsIos();
 		}
 	}
@@ -59,7 +54,7 @@ public class Executor {
 				} else {
 					PrintUI.showMessage("done\n");
 					PrintUI.showMessage("Ejecutando test...");
-					result = ConsoleRunner.executeCmdAndroid(GeneralConstants.ADB_PATH+" -s "+Singleton.getInstance().getDevicesList().get(i)+" shell am instrument -w -e class " + Singleton.getInstance().getPackageName().getAndroid()+ "." + Singleton.getInstance().getMainObject().toLowerCase() + "." + Singleton.getInstance().getClassName() + " "+Singleton.getInstance().getPackageName().getAndroid() +  "." + Singleton.getInstance().getMainObject().toLowerCase() + GeneralConstants.ANDROID_RUNNER);
+					result = ConsoleRunner.executeCmdAndroid(GeneralConstants.ADB_PATH+" -s "+Singleton.getInstance().getDevicesList().get(i)+" shell am instrument -w -e class " + Singleton.getInstance().getPackageName()+ "." + Singleton.getInstance().getClassName() + " "+Singleton.getInstance().getPackageName() + GeneralConstants.ANDROID_RUNNER);
 					PrintUI.showMessage("done\n");
 					PrintUI.showMessage("RESULTADO:\t");
 					PrintUI.showMessage(TestResult.resultManager(result, EnumOS.ANDROID)); 
@@ -72,45 +67,40 @@ public class Executor {
 	
 	// Ejecuta los tests en los dispositivos IOS
 	private static void executeTestsIos() throws Error {
-		try {
-			ConnectionIOS.connectToMac();
-			
-			Singleton s = Singleton.getInstance();
-			Properties prop = new Properties();
-			prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
-			
-			Session session = Singleton.getInstance().getSession();
-			PrintUI.showMessage("Enviando archivo test a Mac...");
-			sendFileToMac(session, prop.getProperty("PATH_IOS")+GeneralConstants.PATH_IOS_DESTINATION, prop.getProperty("IOS_PROJECT_PATH").substring(2).replaceAll(" ", "\\\\ ")+"/"+s.getMainObject()+"UITests/"+s.getMainObject()+"UITests.swift");
-			PrintUI.showMessage("done\n");
-			
-			PrintUI.showMessage("Compilando app en Mac...");
-			ConsoleRunner.executeCmdIOS("cd "+ prop.getProperty("IOS_PROJECT_PATH").replaceAll(" ", "\\\\ ")+";"+GeneralConstants.IOS_COMPILE);
-			PrintUI.showMessage("done\n");
-			
-			String command, cd, project;
-			for(int i=0; i<s.getDevicesList().size(); i++){
-				PrintUI.showMessage("\n\nDispositivo: "+s.getDevicesList().get(i)+"\n");
-				PrintUI.showMessage("Instalando app...");
-		        command = "cd "+prop.getProperty("IOS_PROJECT_PATH").replaceAll(" ", "\\\\ ")+"/build/Debug-iphonesimulator/ ;"
-		        		+"xcrun simctl install "+s.getDevicesList().get(i)+" "+s.getMainObject()+".app";
-		        ConsoleRunner.executeCmdIOS(command);
-		        PrintUI.showMessage("done\n");
-		     
-		        PrintUI.showMessage("Ejecutando test...");
-		        cd = "cd "+prop.getProperty("IOS_PROJECT_PATH").replaceAll(" ", "\\\\ ")+"/;";
-		        project = s.getMainObject()+".xcodeproj";
-		        command = cd+" xcodebuild test -project "+project+" -scheme "+s.getMainObject()+" -destination id="+s.getDevicesList().get(i)+" -only-testing:"+s.getMainObject()+"UITests/"+GeneralConstants.TEST_FILE_NAME+"/"+GeneralConstants.TEST_NAME;
-		        executeIOSAux(command, session);
-		        
-			}	
-
-			ConnectionIOS.disconnectMac();
-			
-		} catch (IOException e) {
-			ConnectionIOS.disconnectMac();
-			throw new Error(ErrorConstants.PROPERTY_NOT_FOUND); 
+		
+		ConnectionIOS.connectToMac();
+		
+		Singleton s = Singleton.getInstance();
+		
+		Session session = Singleton.getInstance().getSession();
+		PrintUI.showMessage("Enviando archivo test a Mac...");
+		sendFileToMac(session, GeneralConstants.PATH_IOS+GeneralConstants.PATH_IOS_DESTINATION, s.getProjectPath().getIOS().substring(2).replaceAll(" ", "\\\\ ")+"/"+s.getMainObject()+"UITests/"+s.getMainObject()+"UITests.swift");
+		PrintUI.showMessage("done\n");
+		
+		PrintUI.showMessage("Compilando app en Mac...");
+		ConsoleRunner.executeCmdIOS("cd "+ s.getProjectPath().getIOS().replaceAll(" ", "\\\\ ")+";"+GeneralConstants.IOS_COMPILE);
+		PrintUI.showMessage("done\n");
+		
+		String command, cd, project;
+		for(int i=0; i<s.getDevicesList().size(); i++){
+			PrintUI.showMessage("\n\nDispositivo: "+s.getDevicesList().get(i)+"\n");
+			PrintUI.showMessage("Instalando app...");
+	        command = "cd "+s.getProjectPath().getIOS().replaceAll(" ", "\\\\ ")+"/build/Debug-iphonesimulator/ ;"
+	        		+"xcrun simctl install "+s.getDevicesList().get(i)+" "+s.getMainObject()+".app";
+	        ConsoleRunner.executeCmdIOS(command);
+	        PrintUI.showMessage("done\n");
+	     
+	        PrintUI.showMessage("Ejecutando test...");
+	        cd = "cd "+s.getProjectPath().getIOS().replaceAll(" ", "\\\\ ")+"/;";
+	        project = s.getMainObject()+".xcodeproj";
+	        command = cd+" xcodebuild test -project "+project+" -scheme "+s.getMainObject()+" -destination id="+s.getDevicesList().get(i)+" -only-testing:"+s.getMainObject()+"UITests/"+GeneralConstants.TEST_FILE_NAME+"/"+GeneralConstants.TEST_NAME;
+	        executeIOSAux(command, session);
+	        
 		}	
+
+		ConnectionIOS.disconnectMac();
+			
+
 	}
 	
 	// Ejecuta test ios

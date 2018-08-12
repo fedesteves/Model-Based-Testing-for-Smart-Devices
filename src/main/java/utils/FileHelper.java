@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.codehaus.plexus.util.FileUtils;
 import constants.GeneralConstants;
+import device.android.DeviceActionsAndroid;
 import device.ios.DeviceActionsIOS;
 import models.Singleton;
 import constants.ErrorConstants;
@@ -27,15 +28,16 @@ public class FileHelper {
 	@SuppressWarnings("resource")
 	public static void createFileAndroid(String path, String generatedTest) throws Error {
 		String textToWrite = GeneralConstants.TEST_HEADER_ANDROID;
-		//if(Singleton.getInstance().isScreenshot())
-			//textToWrite += new DeviceActionsAndroid().screenshot();
+		
+		if(Singleton.getInstance().isScreenshot())
+			textToWrite += new DeviceActionsAndroid().screenshot();
 		
 		textToWrite += 	GeneralConstants.TEST_HEADER_TOP + GeneralConstants.TEST_HEADER_SEPARATOR
 						+ generatedTest
 				        + GeneralConstants.TEST_HEADER_BOT;
 		try {
 			if (!existFile(path)){
-				new File(path.substring(0, path.length()-(GeneralConstants.TEST_FILE_NAME.length() + 6))).mkdirs();
+				new File(path.substring(0, path.length()-(Singleton.getInstance().getMainObject().length())-(GeneralConstants.TEST_FILE_NAME.length())- 6)).mkdirs();
 			}
 			new FileOutputStream(new File(path)).write(textToWrite.getBytes());
 		} catch (IOException e) {
@@ -53,7 +55,7 @@ public class FileHelper {
 			if (!existFile(path)){
 				new File(path).mkdirs();
 			}
-			new FileOutputStream(new File(path+GeneralConstants.TEST_FILE_NAME+".swift")).write(textToWrite.getBytes());
+			new FileOutputStream(new File(path+GeneralConstants.PATH_IOS_DESTINATION)).write(textToWrite.getBytes());
 		} catch (IOException e) {
 			throw new Error(ErrorConstants.CREATE_FILE);
 		}
@@ -84,13 +86,15 @@ public class FileHelper {
 	// Se hace una copia del proyecto original Gx
 	public static void copyProjectAndroid(String projectPath, String mainObjectName) throws Error {
 		try {
-			Properties prop = new Properties();
-			prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
-			String path = prop.getProperty("PATH_TO_COPY_PROJECT");
+			String current_dir = System.getProperty("user.dir");
+			String dir_name = GeneralConstants.PATH_TO_COPY_PROJECT;
+			String path = current_dir+"\\"+dir_name;
 			if(existDir(path)) { 
 				FileUtils.deleteDirectory(new File(path));
+			}else {
+				FileUtils.mkdir(path);
 			}
-			Copy.main(new String[] {"-r","-p", projectPath, path});
+			Copy.main(new String[] {"-r", projectPath, path});
 			FileUtils.deleteDirectory(new File(path+"/build"));
 			FileUtils.deleteDirectory(new File(path+"/.gradle"));
 		} catch (IOException e) {

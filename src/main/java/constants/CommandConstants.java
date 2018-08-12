@@ -12,9 +12,11 @@ public class CommandConstants {
 	public static final String TYPE_ITERATE = "ITERATE";
 	
 	/* COMANDOS */
+	/* NAVEGAR */
+	public static final String NAVIGATE_GO = "GO";
+	
 	/* ACCIONES */
 	public static final String ACTION_BACK = "BACK";
-	public static final String ACTION_MENU = "MENU";
 	public static final String ACTION_TAP = "TAP";
 	public static final String ACTION_DOUBLE_TAP = "DOUBLETAP";
 	public static final String ACTION_LONG_TAP = "LONGTAP";
@@ -39,6 +41,12 @@ public class CommandConstants {
 	public static final String ITERATE_TAP = "LISTTAP";
 	public static final String ITERATE_SCROLL = "LISTSCROLL";
 	
+	public static final String ITERATE_INSERT = "LISTINSERT";
+	public static final String ITERATE_CANCEL = "LISTCANCEL";
+	public static final String ITERATE_SAVE = "LISTSAVE";
+	public static final String ITERATE_SEARCH = "LISTSEARCH";
+	public static final String ITERATE_DELETE = "LISTDELETE";
+	public static final String ITERATE_UPDATE = "LISTUPDATE";
 	
 	
 }

@@ -119,6 +119,42 @@ public interface grammarUIVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListScroll(grammarUI.ListScrollContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link grammarUI#listInsert}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListInsert(grammarUI.ListInsertContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link grammarUI#listSave}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListSave(grammarUI.ListSaveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link grammarUI#listCancel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListCancel(grammarUI.ListCancelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link grammarUI#listSearch}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListSearch(grammarUI.ListSearchContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link grammarUI#listDelete}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListDelete(grammarUI.ListDeleteContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link grammarUI#listUpdate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListUpdate(grammarUI.ListUpdateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link grammarUI#go}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

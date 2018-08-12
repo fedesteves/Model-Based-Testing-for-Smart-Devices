@@ -1,16 +1,11 @@
 package generator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
 import abstractClasses.Actions;
 import abstractClasses.Iterate;
 import abstractClasses.Navigate;
 import abstractClasses.Verify;
 import constants.CommandConstants;
-import constants.ErrorConstants;
 import constants.GeneralConstants;
 import device.android.DeviceActionsAndroid;
 import device.ios.DeviceActionsIOS;
@@ -50,39 +45,43 @@ public class CodeGenerator {
 					String runParamTwo = "";
 					String runParamThree = "";
 					if(runAction.length > 1)
-						runControl = runAction[1];
+						runControl = runAction[1].replace("\"", "");
 					if(runAction.length > 2)
-						runParamOne = runAction[2];
+						runParamOne = runAction[2].replace("\"", "");
 					if(runAction.length > 3)
-						runParamTwo = runAction[3];
+						runParamTwo = runAction[3].replace("\"", "");
 					if(runAction.length > 4)
-						runParamThree = runAction[4];
+						runParamThree = runAction[4].replace("\"", "");
 					generatedTest += getRunActionTest(runActionType, runControl, runParamOne, runParamTwo, runParamThree, system);
 					break;
 				case CommandConstants.TYPE_VERIFY: 
 					String verifyAux = tests.get(i).split("\\(")[1];
 					verifyAux = verifyAux.substring(0, verifyAux.length()-1);
 					String verifyS[] = verifyAux.split(CommandConstants.FIELD_SEPARATOR);
-					String assertControl = verifyS[1];
-					String assertProperty = verifyS[0];
+					String assertControl = verifyS[1].replace("\"", "");
+					String assertProperty = verifyS[0].trim().replace("\"", "");
 					String assertValue = "";
 					if(verifyS.length == 3)
-						assertValue = verifyS[2];
-					generatedTest += getVerifyTest(assertProperty.trim(), assertControl, assertValue, system);
+						assertValue = verifyS[2].replace("\"", "");
+					generatedTest += getVerifyTest(assertProperty, assertControl, assertValue, system);
 					break;
 				case CommandConstants.TYPE_NAVIGATE: 
 					String navigateAux = tests.get(i).split("\\(")[1];
-					String navigate = navigateAux.substring(0, navigateAux.length()-1);
-					generatedTest += getNavigateTest(navigate, system);
+					String navigate = navigateAux.substring(0, navigateAux.length()-1).replace("\"","");
+					String navigateCommand =navigate.split(CommandConstants.FIELD_SEPARATOR)[0];
+					String panel =navigate.split(CommandConstants.FIELD_SEPARATOR)[1];
+					generatedTest += getNavigateTest(navigateCommand, panel, system);
 					break;
 				case CommandConstants.TYPE_ITERATE: 
 					String iterateAction = tests.get(i).split("\\(")[1];
 					iterateAction = iterateAction.substring(0,iterateAction.length() -1);
 					String iterate[] = iterateAction.split(CommandConstants.FIELD_SEPARATOR);
 					iterateAction = iterate[0];
-					String iterateControl = iterate[1].replace("\"","");
-					String iteratePosition = iterate[2].replace("\"","");
-					generatedTest += getIterateTest(iterateAction, iterateControl, iteratePosition, system);
+					String iteratePosition ="";
+					if (iterate.length==2)
+						iteratePosition = iterate[1].replace("\"","");
+					
+					generatedTest += getIterateTest(iterateAction, iteratePosition, system);
 					break;
 			}
 		}
@@ -90,7 +89,7 @@ public class CodeGenerator {
 	}
 	
 	// Tests de tipo Iteracion
-	private static String getIterateTest(String action, String control, String position, String system) {
+	private static String getIterateTest(String action, String position, String system) {
 		String generatedTest = "";
 		Iterate iterate;
 		if(system == EnumOS.ANDROID)
@@ -99,11 +98,29 @@ public class CodeGenerator {
 			iterate = new IteratesIOS();
 
 		switch(action.toUpperCase()){
-			case CommandConstants.ACTION_BACK:
-				generatedTest += iterate.listScroll(control, position);
+			case CommandConstants.ITERATE_SCROLL:
+				generatedTest += iterate.listScroll(position);
 				break;
-			case CommandConstants.ACTION_TAP:
-				generatedTest += iterate.listTap(control, position);
+			case CommandConstants.ITERATE_TAP:
+				generatedTest += iterate.listTap(position);
+				break;
+			case CommandConstants.ITERATE_INSERT:
+				generatedTest += iterate.listInsert();
+				break;
+			case CommandConstants.ITERATE_CANCEL:
+				generatedTest += iterate.listCancel();
+				break;
+			case CommandConstants.ITERATE_SAVE:
+				generatedTest += iterate.listSave();
+				break;
+			case CommandConstants.ITERATE_SEARCH:
+				generatedTest += iterate.listSearch(position);
+				break;
+			case CommandConstants.ITERATE_DELETE:
+				generatedTest += iterate.listDelete(position);
+				break;
+			case CommandConstants.ITERATE_UPDATE:
+				generatedTest += iterate.listUpdate(position);
 				break;
 		}
 		return generatedTest;
@@ -153,10 +170,10 @@ public class CodeGenerator {
 				generatedTest += actions.typeText(control, param1);
 				break;
 			case CommandConstants.ACTION_EDIT_DATE:
-				generatedTest += actions.setDate(control.replace("\"", ""), param1.replace("\"", ""), param2.replace("\"", ""), param3.replace("\"", ""));
+				generatedTest += actions.setDate(control, param1, param2, param3);
 				break;
 			case CommandConstants.ACTION_EDIT_TIME:
-				generatedTest += actions.setTime(control, param1.replace("\"", ""), param2.replace("\"", ""));
+				generatedTest += actions.setTime(control, param1, param2);
 				break;
 			}
 		return generatedTest;
@@ -189,14 +206,19 @@ public class CodeGenerator {
 	}
 	
 	// Tests de tipo Accion
-	private static String getNavigateTest(String panel, String system) {
+	private static String getNavigateTest(String action, String panel, String system) {
 		String generatedTest = "";
 		Navigate navigate;
 		if(system == EnumOS.ANDROID)
 			navigate = new NavigateAndroid();
 		else
 			navigate = new NavigateIOS();
-		generatedTest += navigate.go(panel);
+		
+		switch(action.toUpperCase()){
+			case CommandConstants.NAVIGATE_GO:
+				generatedTest += navigate.go(panel); 
+				break;	
+		}
 		return generatedTest;
 	}
 
@@ -207,13 +229,7 @@ public class CodeGenerator {
 			FileHelper.createFileAndroid(GeneralConstants.PATH_ANDROID, generatedTest);
 		}
 		else{
-			Properties prop = new Properties();
-			try {
-				prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
-				FileHelper.createFileIOS(prop.getProperty("PATH_IOS"), generatedTest);
-			} catch (IOException e) {
-				throw new Error(ErrorConstants.PROPERTY_NOT_FOUND);
-			}
+			FileHelper.createFileIOS(GeneralConstants.PATH_IOS, generatedTest);
 		}
 	}
 	
