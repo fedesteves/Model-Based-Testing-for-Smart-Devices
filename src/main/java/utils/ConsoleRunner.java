@@ -19,7 +19,9 @@ public class ConsoleRunner {
 		
 	// Ejecuta un comando en consola
 	public static TestResult executeCmdAndroid(String cmdCommand) throws Error {
+		
 		//PrintUI.showMessage("\n"+cmdCommand+"\n");
+		
 		String s = null;
 		int resultCode = 0;
 		String resultMessage = "";
@@ -85,7 +87,9 @@ public class ConsoleRunner {
         	Session session = Singleton.getInstance().getSession();
 	        ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
 	        InputStream in = channelExec.getInputStream();
-
+	        
+	        //PrintUI.showMessage("\n"+command+"\n");
+	        
             channelExec.setCommand(command);
 			channelExec.connect();
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(in));

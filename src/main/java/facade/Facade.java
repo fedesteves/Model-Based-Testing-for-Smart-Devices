@@ -41,8 +41,6 @@ public class Facade {
 				
 				// Se crea instancia de singleton
 				Singleton instance = Singleton.getInstance();
-				//Properties prop = new Properties();
-				//prop.load(new FileInputStream(new File(GeneralConstants.PROPERTIES_PATH)));
 
 				String sys = params[0];
 				int counter = 0, tope = 0;
@@ -60,32 +58,31 @@ public class Facade {
 					PrintUI.showMessage("\n\n");
 					PrintUI.showMessage("*** "+sys.toString()+" ***\n");
 					
-					String android_proj_path="";
-					if (params[3].split(CommandConstants.FIELD_SEPARATOR).length ==2 ){
-						android_proj_path=params[3].split(CommandConstants.FIELD_SEPARATOR)[0];
-					}
 					
 					
-						
+					/*
+					for (int i=0;i<9 ;i++)
+						System.out.println(params[i]);
+					*/
+
 					if (sys == EnumOS.ANDROID) {
 						//Se copia Proyecto Gx a otro directorio
-						PrintUI.showMessage("Copiando proyecto...");
-						FileHelper.copyProjectGx(android_proj_path, params[5]);
-						PrintUI.showMessage("done\n");
+						if (params[8].contains(GeneralConstants.YES)) {
+							PrintUI.showMessage("Copiando proyecto...");
+							FileHelper.copyProjectGx(params[5], params[3]);
+							PrintUI.showMessage("done\n");
+						}
 					} else if (sys == EnumOS.IOS) {
 						ConnectionIOS.connectToMac();
 					}
 					
-					android_proj_path =System.getProperty("user.dir")+"\\"+GeneralConstants.PATH_TO_COPY_PROJECT;
-					String ios_proj_path = "";
-					if (sys.equals(EnumOS.IOS) && (params[3].split(CommandConstants.FIELD_SEPARATOR).length ==2 ))
-						ios_proj_path = "~"+params[3].split(CommandConstants.FIELD_SEPARATOR)[1];
-					
+					String android_proj_path =System.getProperty("user.dir")+"\\"+GeneralConstants.PATH_TO_COPY_PROJECT;
+					String ios_proj_path = "~"+params[6];
 					
 					//Carga parametros en singleton
 					PrintUI.showMessage("Cargando informacion...");
 					 // (System, devices, projectPath, packageApp, mainObject, takeScreenShot)
-					loadParamsInSingleton(sys, devices(params[1]), new AndroidIOS(android_proj_path, ios_proj_path), params[4], params[5], params[6]);
+					loadParamsInSingleton(sys, devices(params[1]), new AndroidIOS(android_proj_path, ios_proj_path), params[7], params[3], params[4]);
 					PrintUI.showMessage("done\n");
 					
 					//Verifica dispositivos conectados

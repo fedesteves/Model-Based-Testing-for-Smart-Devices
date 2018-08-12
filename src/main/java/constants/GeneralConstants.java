@@ -48,7 +48,7 @@ public class GeneralConstants {
 			  "import org.junit.Test;\n"
 			+ "import android.content.Intent;\n"
 			+ "import android.support.test.espresso.contrib.PickerActions;\n"
-			//+ "import android.support.test.espresso.contrib.RecyclerViewActions;\n"
+			+ "import android.support.test.espresso.contrib.RecyclerViewActions;\n"
 			+ "import android.support.test.InstrumentationRegistry;\n"
 			+ "import android.support.test.rule.ActivityTestRule;\n"
 			+ "import org.junit.Rule;\n"

@@ -94,7 +94,7 @@ public class FileHelper {
 			}else {
 				FileUtils.mkdir(path);
 			}
-			Copy.main(new String[] {"-r","-ip", projectPath, path});
+			Copy.main(new String[] {"-r", projectPath, path});
 			FileUtils.deleteDirectory(new File(path+"/build"));
 			FileUtils.deleteDirectory(new File(path+"/.gradle"));
 		} catch (IOException e) {
