@@ -9,8 +9,8 @@ public class VerifysAndroid extends Verify {
 	
 	@Override
 	public String verifyText(String controlName, String textToCheck) {
-		String controlNameAux = controlName.trim().toLowerCase().replaceAll("&", "");
-		controlNameAux = controlNameAux.substring(0, 1).toUpperCase()+controlNameAux.substring(1, controlNameAux.length());
+		String controlNameAux = controlName.trim().replaceAll("&", ""); //.toLowerCase()
+		//controlNameAux = controlNameAux.substring(0, 1).toUpperCase()+controlNameAux.substring(1, controlNameAux.length());
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_VERIFYTEXT"));
 		c.add("controlName", controlNameAux);
 		c.add("textToCheck", textToCheck);

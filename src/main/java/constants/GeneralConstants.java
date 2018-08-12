@@ -57,6 +57,7 @@ public class GeneralConstants {
             + "import static android.support.test.espresso.matcher.ViewMatchers.*;\n"
 			+ "import android.os.Environment;\n"
 			+ "import android.support.test.InstrumentationRegistry;\n"
+			+ "import android.view.KeyEvent;\n"
 			//+ "import android.support.test.uiautomator.UiDevice;\n"
 			+ "import static org.hamcrest.Matchers.*;\n"
 			+ "import com.artech.controls.GxListView;\n"
