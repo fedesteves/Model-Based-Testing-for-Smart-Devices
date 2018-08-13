@@ -3,7 +3,7 @@
 PARAMETROS (.jar)
 
 
--S		Especificar sistema
+-S<\t>Especificar sistema
 	A			Android
 	I			iOS
 	B			Ambos
