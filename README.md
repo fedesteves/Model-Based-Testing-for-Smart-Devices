@@ -60,81 +60,82 @@ PARAMETROS (.jar)
 
 Parametros obligatorios
 
- -S,-D,-T,-M
+    -S,-D,-T,-M
  
  
- Si se espcifico sistema Ambos, parametros requeridos
+Si se espcifico sistema Ambos, parametros requeridos
  
--PA, -RI, -RA
+    -PA, -RI, -RA
 
 
 Si se espcifico sistema Android, parametros requeridos
 
--PA, -RA
+    -PA, -RA
 
 
 Si se espcifico sistema iOS, parametros requeridos
 
--RI
+    -RI
 
 
 
 Parametros opcionales
 
--N, -CA
+    -N, -CA
 
 
 Commands:
 
 
-back
+    back
 
-tap("control")
+    tap("control")
 
-longTap("control")
+    longTap("control")
 
-doubleTap("control")
+    doubleTap("control")
 
-swipeDown
+    swipeDown
 
-swipeUp
+    swipeUp
 
-swipeLeft
+    swipeLeft
 
-swipeRight
+    swipeRight
 
-fill("control", "texto")
+    fill("control", "texto")
 
-editDate("control", "dia", "mes", "año")
+    editDate("control", "dia", "mes", "año")
 
-editTime("control", "hora", "minuto")
+    editTime("control", "hora", "minuto")
 
-isDisplayed("control")
+    isDisplayed("control")
 
-isCompletelyDisplayed("control")
+    isCompletelyDisplayed("control")
 
-hasFocus("control")
+    hasFocus("control")
 
-isEnabled("control")
+    isEnabled("control")
 
-isClickable("control")
+    isClickable("control")
 
-validate("control", "texto")
+    validate("control", "texto")
 
-listTap("control", "posicion")
+    listTap("control", "posicion")
 
-listScroll("control", "posicion")
+    listScroll("control", "posicion")
 
-listInsert
+    listInsert
 
-listCancel
+    listCancel
 
-listSave
+    listSave
 
-listSearch("texto de busqueda")
+    listSearch("texto de busqueda")
 
-listDelete("posicion")
+    listDelete("posicion")
 
-listUpdate("posicion")
+    listUpdate("posicion")
 
-go("panel")
+    go("panel")
+
