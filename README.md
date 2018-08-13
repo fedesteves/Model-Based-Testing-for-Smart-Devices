@@ -1,16 +1,16 @@
 # Model Based Testing for Smart Devices
 
+
+
 Commands:
 
 back
 
-tap("controlName")
+tap("control")
 
-longTap("controlName")
+longTap("control")
 
-doubleTap("controlName")
-
-typeText("controlName","text to type")
+doubleTap("control")
 
 swipeDown
 
@@ -20,25 +20,38 @@ swipeLeft
 
 swipeRight
 
-editDate("controlName","day","month","year")
+fill("control", "texto")
 
-editTime("controlName","hour","minute")
+editDate("control", "dia", "mes", "año")
 
-listTap("viewName","position")
+editTime("control", "hora", "minuto")
 
-listScroll("viewName","position")
+isDisplayed("control")
 
-go("panelName")
+isCompletelyDisplayed("control")
 
-validate("controlName","text to verify")
+hasFocus("control")
 
-isDisplayed("controlName")
+isEnabled("control")
 
-isCompletelyDisplayed("controlName")
+isClickable("control")
 
-hasFocus("controlName")
+validate("control", "texto")
 
-isEnabled("controlName")
+listTap("control", "posicion")
 
-isClickable("controlName")
+listScroll("control", "posicion")
 
+listInsert
+
+listCancel
+
+listSave
+
+listSearch("texto de busqueda")
+
+listDelete("posicion")
+
+listUpdate("posicion")
+
+go("panel")
