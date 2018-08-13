@@ -62,10 +62,11 @@ Parametros obligatorios
 
  -S,-D,-T,-M
  
+ 
  Si se espcifico sistema Ambos, parametros requeridos
  
 -PA, -RI, -RA
-			
+
 
 Si se espcifico sistema Android, parametros requeridos
 
@@ -79,16 +80,15 @@ Si se espcifico sistema iOS, parametros requeridos
 
 
 Parametros opcionales
+
 -N, -CA
 
 
 
 
 
-
-
-
 Commands:
+
 
 back
 
