@@ -4,45 +4,62 @@ PARAMETROS (.jar)
 
 
 -S Especificar sistema
+
     A Android
+    
     I iOS
+    
     B Ambos
 
 
 -D Especificar dispositivos donde se va a ejecutar test
+
     A Todos los dispositivos conectados
+    
     id1,id2,... Especificar dispositivos por ID (chequear dispositivos con "adb devices")
 
 
 -T Ruta donde se encuentra archivo test
+
     pathTestFile
 
 
 -M Especificar Main Object
+
     mainObjectName
 
 
 -N ScreenShot (por defecto No)
+
     S Si
+    
     N No
 	
+	
 -PA Package Android
+
     package
 
 
 -RA Ruta donde se aloja proyecto Android
+
     pathAndroidProject
+    
 
 -RI Ruta de la Mac donde se aloja proyecto iOS
+
     pathIOSProjectInMac
+    
 
 -CA Especificar si se desea copiar proyecto Android (por defecto Si)
+
     S Si
+    
     N No
-
-
+    
 
 Parametros obligatorios
+
  -S,-D,-T,-M
  
  Si se espcifico sistema Ambos, parametros requeridos
