@@ -175,6 +175,8 @@ public class Menu {
 							paramsOK = false;
 							throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.INVALID);
 						} 
+						//if (Params[y][3].substring(Params[y][3].length()-1, Params[y][3].length()).contains("\\"))
+						//	Params[y][3] = (Params[y][3]).substring(1, Params[y][3].length()-1);
 					}
 					
 					// SI SELECCIONO SISTEMA IOS o AMBOS, DEBE ESPECIFICAR RUTA_IOS
@@ -192,10 +194,6 @@ public class Menu {
 							paramsOK = false;
 							throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.INVALID);
 						} 
-						if (Params[y][3].equals("")){
-							paramsOK = false;
-							throw new Error(MenuConstants.PARAMETER+"(-"+Params[y][1]+")\n"+MenuConstants.NO_OPTION);
-						}	
 					}
 					
 					if (Params[y][0]== MenuConstants.COPY_ANDROID)  {

@@ -34,10 +34,13 @@ public class ActionsAndroid extends Actions{
 
 	@Override
 	public String typeText(String controlName, String textToType) {
-		String controlNameAux = controlName.trim().replaceAll("&", ""); //.toLowerCase()
-		//controlNameAux = controlNameAux.substring(0, 1).toUpperCase()+controlNameAux.substring(1, controlNameAux.length());
+		
+		if (controlName.contains("&")){
+			controlName = controlName.toLowerCase().trim().replaceAll("&", ""); 
+			controlName = controlName.substring(0, 1).toUpperCase() + controlName.substring(1);
+		}
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_TYPETEXT"));
-		c.add("controlName", controlNameAux);
+		c.add("controlName", controlName);
 		c.add("textToType", textToType);
 		String output = c.render();
 		return output;
@@ -53,7 +56,8 @@ public class ActionsAndroid extends Actions{
 
 	@Override
 	public String setDate(String controlName, String day, String month, String year) {
-		controlName = controlName.trim().replaceAll("&", "");
+		controlName = controlName.trim().toLowerCase().replaceAll("&", "");
+		controlName = controlName.substring(0, 1).toUpperCase() + controlName.substring(1);
 		String monthAux = month;
 		if(Integer.parseInt(month.trim()) < 10 && month.trim().length() > 1)
 			monthAux = month.substring(1, 2);
@@ -71,11 +75,20 @@ public class ActionsAndroid extends Actions{
 
 	@Override
 	public String setTime(String controlName, String hour, String minute) {
-		controlName = controlName.trim().replaceAll("&", "");
+		controlName = controlName.trim().toLowerCase().replaceAll("&", "");
+		controlName = controlName.substring(0, 1).toUpperCase() + controlName.substring(1);
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("ANDROID_SETTIME"));
 		c.add("controlName", controlName);
-		c.add("hour", hour.trim());
-		c.add("minute", minute.trim());
+		
+		String hourAux = hour;
+		if(Integer.parseInt(hour.trim()) < 10 && hour.trim().length() > 1)
+			hourAux = hour.substring(1, 2);
+		c.add("hour", hourAux.trim());
+		
+		String minuteAux = minute;
+		if(Integer.parseInt(minute.trim()) < 10 && minute.trim().length() > 1)
+			minuteAux = minute.substring(1, 2);
+		c.add("minute", minuteAux.trim());
 		String output = c.render();
 		return output;
 	}

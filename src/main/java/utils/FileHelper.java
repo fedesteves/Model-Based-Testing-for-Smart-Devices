@@ -67,7 +67,7 @@ public class FileHelper {
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(projectPath+"\\"+GeneralConstants.GRADLE_PROPERTY_FILE_NAME);
+			input = new FileInputStream(projectPath.replaceAll("\"", "")+GeneralConstants.GRADLE_PROPERTY_FILE_NAME);
 			prop.load(input);
 			if(prop.getProperty(GeneralConstants.GRADLE_PROPERTY_SDK_DIR) == null)
 				throw new Error(ErrorConstants.PROPERTY_SDK);
@@ -86,15 +86,13 @@ public class FileHelper {
 	// Se hace una copia del proyecto original Gx
 	public static void copyProjectAndroid(String projectPath, String mainObjectName) throws Error {
 		try {
-			String current_dir = System.getProperty("user.dir");
-			String dir_name = GeneralConstants.PATH_TO_COPY_PROJECT;
-			String path = current_dir+"\\"+dir_name;
+			String currentDir = System.getProperty("user.dir");
+			String dirName = GeneralConstants.PATH_TO_COPY_PROJECT;
+			String path = currentDir+"\\"+dirName;
 			if(existDir(path)) { 
 				FileUtils.deleteDirectory(new File(path));
-			}else {
-				FileUtils.mkdir(path);
 			}
-			Copy.main(new String[] {"-r", projectPath, path});
+			Copy.main(new String[] {"-r","-ip",projectPath.replaceAll("\"", ""), path});
 			FileUtils.deleteDirectory(new File(path+"/build"));
 			FileUtils.deleteDirectory(new File(path+"/.gradle"));
 		} catch (IOException e) {

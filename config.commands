@@ -4,8 +4,8 @@ ANDROID_LONGTAP=onControl(withName("<controlName>")).perform(longClick());
 ANDROID_DOUBLETAP=onControl(withName("<controlName>")).perform(doubleClick());
 ANDROID_TYPETEXT=onControl(withTagValue(is("<controlName>"))).perform(typeText("<textToType>"));
 ANDROID_SWIPE=onControl(withResourceName("scrollViewLayoutContentScroll")).perform(<actionName>());
-ANDROID_SETDATE=onControl(withLabelCaption("<controlName>")).perform(click()); onControl(withResourceName("datePicker")).perform(PickerActions.setDate(<year>,<month>,<day>)); onControl(withResourceName("button1")).perform(click());
-ANDROID_SETTIME=onControl(withTagValue(is("<controlName>"))).perform(replaceText("<hour>:<minute>:00"));
+ANDROID_SETDATE=onControl(withTagValue(is("<controlName>"))).perform(click()); onControl(withResourceName("datePicker")).perform(PickerActions.setDate(<year>,<month>,<day>)); onControl(withResourceName("button1")).perform(click());
+ANDROID_SETTIME=onControl(withTagValue(is("<controlName>"))).perform(click()); onControl(withResourceName("timePicker")).perform(PickerActions.setTime(<hour>, <minute>)); onControl(withResourceName("button1")).perform(click());
 ANDROID_LISTTAP=onGrid(allOf()).inAdapterView(is(instanceOf(GxListView.class))).atPosition(<position>).perform(click());
 ANDROID_LISTSCROLL=onGrid(allOf()).inAdapterView(is(instanceOf(GxListView.class))).atPosition(<position>).perform(scrollTo());
 ANDROID_LISTINSERT=onControl(withContentDescription("Insert")).perform(click());
@@ -30,7 +30,7 @@ IOS_DOUBLETAP=mainTable().tap(text: "<controlName>")\n\t\tmainTable().tap(text: 
 IOS_TYPETEXT=mainTable().fill(edit: "<controlName>", value: "<textToType>")
 IOS_SWIPE=XCUIApplication().otherElements["Maintable"].<actionName>()
 IOS_SETDATE=mainTable().edit(date: "<controlName>", month: "<month>", day: "<day>", year: "<year>")
-IOS_SETTIME=let picker:XCUIElement = XCUIApplication().datePickers.element(boundBy: 0) \npicker.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "<hour>")\npicker.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: "<minute>")\npicker.pickerWheels.element(boundBy: 2).adjust(toPickerWheelValue: "<am_pm>")
+IOS_SETTIME=mainTable().tap(text: "<controlName>")\nlet picker:XCUIElement = XCUIApplication().datePickers.element(boundBy: 0) \npicker.pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: "<hour>")\npicker.pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: "<minute>")\npicker.pickerWheels.element(boundBy: 2).adjust(toPickerWheelValue: "<am_pm>")\nmainTable().tap(text: "<controlName>")
 IOS_LISTTAP=mainTable().grid(name: "Grid1").row(index: <position>).tap()
 IOS_LISTSCROLL=
 IOS_LISTINSERT=navigationBar().buttons["Add"].tap()

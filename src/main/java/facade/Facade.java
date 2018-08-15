@@ -57,13 +57,6 @@ public class Facade {
 					
 					PrintUI.showMessage("\n\n");
 					PrintUI.showMessage("*** "+sys.toString()+" ***\n");
-					
-					
-					
-					/*
-					for (int i=0;i<9 ;i++)
-						System.out.println(params[i]);
-					*/
 
 					if (sys == EnumOS.ANDROID) {
 						//Se copia Proyecto Gx a otro directorio

@@ -18,7 +18,6 @@ public class ActionsIOS extends Actions{
 
 	@Override
 	public String longTap(String controlName) {
-		// No esta disponible en la API
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_LONGTAP"));
 		c.add("controlName", controlName);
 		String output = c.render();
@@ -35,6 +34,12 @@ public class ActionsIOS extends Actions{
 
 	@Override
 	public String typeText(String controlName, String textToType) {
+		if (controlName.contains("&")){
+			controlName = controlName.toLowerCase().trim(); 
+		} else {
+			controlName = controlName.toLowerCase().trim().replaceAll("&", ""); 
+			controlName = controlName.substring(0, 1).toUpperCase() + controlName.substring(1);
+		}
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_TYPETEXT"));
 		c.add("controlName", controlName);
 		c.add("textToType", textToType);
@@ -103,13 +108,19 @@ public class ActionsIOS extends Actions{
 	@Override
 	public String setTime(String controlName, String hour, String minute) {
 		ST c = new ST(Singleton.getInstance().getStringCommands().getProperty("IOS_SETTIME"));
-		c.add("hour", hour.trim());
-		c.add("minute", minute.trim());
+		c.add("controlName", controlName.toLowerCase());
+		
 		String temp = "AM";
-		for (int i=12; i < 25 ;i++)
-			if (hour.contains(Integer.toString(i)))
-				temp = "PM";
+		if(Integer.parseInt(hour) >= 12)
+			temp = "PM";
 		c.add("am_pm", temp);
+		
+		String hourAux = "";
+		if(Integer.parseInt(hour) >= 12)
+			hourAux = String.valueOf(Integer.parseInt(hour) - 12);
+		c.add("hour", hourAux.trim());
+		c.add("minute", minute.trim());
+		
 		
 		String output = c.render();
 		return output;

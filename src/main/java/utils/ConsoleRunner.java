@@ -25,8 +25,9 @@ public class ConsoleRunner {
 		String s = null;
 		int resultCode = 0;
 		String resultMessage = "";
+		Process p = null;
         try {
-            Process p = Runtime.getRuntime().exec(cmdCommand);
+            p = Runtime.getRuntime().exec(cmdCommand);
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
@@ -51,6 +52,10 @@ public class ConsoleRunner {
         catch (IOException e) {
         	resultCode = 1;
         	throw new Error(ErrorConstants.COMMAND+cmdCommand);
+        }
+        finally {
+        	if(p != null)
+        		p.destroy();
         }
 
         return new TestResult(resultCode, resultMessage);
